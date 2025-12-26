@@ -1,0 +1,427 @@
+/* Google 主按钮容器样式 */
+.login-button {
+  width: 100%;
+}
+
+.login-button .login-button-text {
+  font-weight: normal;
+}
+
+/* 公共按钮样式 */
+.login-button #modal_third-party-login-facebook .btn-facebook,
+.login-button #modal_third-party-login-google .thirdpart-login-btn,
+.login-button #modal_third-party-login-apple .thirdpart-login-btn {
+  width: 100%;
+  height: 48px;
+  text-align: center;
+  border-radius: 40px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  margin: 0;
+  display: flex !important;
+  align-items: center;
+}
+
+/* 各平台按钮颜色样式 */
+.login-button #modal_third-party-login-google .thirdpart-login-btn {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+  border: 1px solid #222 !important;
+}
+
+.login-button #modal_third-party-login-apple .thirdpart-login-btn {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #222 !important;
+}
+
+.login-button #modal_third-party-login-facebook .thirdpart-login-btn {
+  background-color: #0071EB !important;
+  color: #FFFFFF !important;
+  border: none !important;
+}
+
+/* 文本颜色 - 合并 */
+.login-button #modal_third-party-login-google .thirdpart-login-text {
+  color: #000000 !important;
+}
+
+.login-button #modal_third-party-login-apple .thirdpart-login-text,
+.login-button #modal_third-party-login-facebook .thirdpart-login-text {
+  color: #FFFFFF !important;
+}
+
+/* 公共链接布局样式 - 合并 */
+.login-button #modal_third-party-login-google a,
+.login-button #modal_third-party-login-apple a,
+.login-button #modal_third-party-login-facebook a {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+}
+
+/* 公共图标样式 - 合并 */
+.login-button #modal_third-party-login-google .thirdpart-login-btn .thirdpart-login-icon,
+.login-button #modal_third-party-login-apple .thirdpart-login-btn .thirdpart-login-icon,
+.login-button #modal_third-party-login-facebook .thirdpart-login-btn .thirdpart-login-icon {
+  position: absolute;
+  left: 16px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+}
+
+/* 各平台图标背景图片 */
+.login-button #modal_third-party-login-google .thirdpart-login-btn .thirdpart-login-icon {
+  background-image: url('https://s.alicdn.com/@img/imgextra/i4/O1CN01NVwO2E29VUXMczINg_!!6000000008073-2-tps-126-126.png') !important;
+}
+
+.login-button #modal_third-party-login-apple .thirdpart-login-btn .thirdpart-login-icon {
+  background-image: url('https://img.alicdn.com/imgextra/i1/O1CN01FdcNBV1dsKaW6TW1y_!!6000000003791-2-tps-48-48.png') !important;
+}
+
+.login-button #modal_third-party-login-facebook .thirdpart-login-btn .thirdpart-login-icon {
+  background-image: url('https://gw.alicdn.com/imgextra/i2/O1CN01FxVI4z1TLgC5nYkFT_!!6000000002366-2-tps-48-48.png') !important;
+}
+/* 第三方登录图标按钮样式 - 参考 FunctionButton 强制覆盖 */
+
+/* 强制覆盖 havana-login 的默认图标样式 */
+#icbu-third-party-login-icon-google .thirdpart-login-icon,
+#icbu-third-party-login-icon-facebook .thirdpart-login-icon,
+#icbu-third-party-login-icon-apple .thirdpart-login-icon {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  border: none !important;
+  transition: transform 0.2s !important;
+}
+
+/* Google 图标 */
+#icbu-third-party-login-icon-google .thirdpart-login-icon {
+  background-image: url('https://img.alicdn.com/imgextra/i1/O1CN01DBjJ1L1SLqj1rkxhi_!!6000000002231-2-tps-96-96.png') !important;
+}
+
+/* Facebook 图标 */
+#icbu-third-party-login-icon-facebook .thirdpart-login-icon {
+  background-image: url('https://img.alicdn.com/imgextra/i4/O1CN01zAVxGC1lYC6Fijubz_!!6000000004830-2-tps-96-96.png') !important;
+}
+
+/* Apple 图标 */
+#icbu-third-party-login-icon-apple .thirdpart-login-icon {
+  background-image: url('https://img.alicdn.com/imgextra/i2/O1CN01teyVAZ1r3PAY3spaz_!!6000000005575-2-tps-84-84.png') !important;
+}
+
+/* 隐藏文本（icon模式不显示文字） */
+#icbu-third-party-login-icon-google .thirdpart-login-text,
+#icbu-third-party-login-icon-facebook .thirdpart-login-text,
+#icbu-third-party-login-icon-apple .thirdpart-login-text {
+  display: none !important;
+}
+
+/* 遮罩层 */
+.icbu-login-modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 9999;
+  animation: maskFadeIn 0.3s ease-out;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.icbu-login-modal-mask.hidden {
+  display: none;
+}
+
+@keyframes maskFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 弹窗容器 - 从底部弹出 */
+.icbu-login-modal-third {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px 12px 0 0;
+  width: 100%;
+  max-width: 750px;
+  max-height: 90vh;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  animation: slideUp 0.3s ease-out;
+  /* 如果内容过多，弹窗内部可以滚动 */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.navigator-handle {
+  width: 40px;
+  height: 4px;
+  background: #ddd;
+  border-radius: 4px;
+}
+
+/* 头部 */
+.modal-header {
+  display: flex;
+  height: 56px;
+  padding: 0 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  flex: 1;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: -0.7px;
+}
+
+.modal-close {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #222;
+  padding: 0;
+  transition: opacity 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modal-close:active {
+  opacity: 0.6;
+}
+
+/* 内容区 */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 20px;
+}
+
+/* TipBanner 组件样式在独立文件中 */
+
+/* 主按钮容器（Google 或 Apple） */
+.main-button-wrapper {
+  width: 100%;
+}
+
+/* OR 分隔线 */
+.divider {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+}
+
+.divider-text {
+  color: #767676;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* 其他登录方式（图标按钮区域） */
+.other-logins {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+/* 图标按钮容器 */
+.login-icon-button {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+
+/* Email 按钮 */
+.icon-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  padding: 0;
+  background: #FA6400;
+  color: white;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.icon-button:active {
+  transform: scale(0.95);
+}
+
+.icon-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* 响应式适配 */
+@media (min-width: 750px) {
+  .icbu-login-modal-third {
+    max-width: 375px;
+  }
+}
+
+/* Tip 横幅 - 复制自 icbu-m-login-banner，去掉右侧按钮部分 */
+.tip-banner {
+  width: 100%;
+  min-height: 40px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.tip-banner__content {
+  display: flex;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 12px;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  background: linear-gradient(89deg, #ffead1 -1.66%, #ffd5d1 101.88%);
+  overflow: hidden;
+}
+
+/* 图标标签 */
+.tip-banner__tag {
+  display: flex;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.tip-banner__tag-image-wrapper {
+  display: flex;
+  width: 28px;
+  justify-content: center;
+  align-items: center;
+}
+
+.tip-banner__tag-image {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  aspect-ratio: 1;
+}
+
+/* 标题文本 */
+.tip-banner__title {
+  word-wrap: break-word;
+  color: #4b1d1f;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1.3;
+  flex: 1;
+  min-width: 0;
+}
+
+.tip-banner__title-subtext {
+  word-wrap: break-word;
+  color: #4b1d1f;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+
+.rtl .icon-rtl {
+  transform: rotate(180deg);
+}
+
+.tap-toast-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 60px;
+  z-index: 10000;
+}
+.tap-toast {
+  background-color: #000000;
+  opacity: 0.85;
+  height: 48px;
+  padding: 16px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  z-index: 10000;
+}
+.tap-toast.show {
+  opacity: 1;
+}
+.tap-toast-tips {
+  font-size: 16px;
+  color: #fff;
+  padding-left: 8px;
+}
