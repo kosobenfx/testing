@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manufacturers, Suppliers, Exporters & Importers from the world's largest online B2B marketplace-Alibaba.com</title>
+<link rel="shortcut icon" href="//is.alicdn.com/favicon.ico" type="image/x-icon" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      color: #333;
+      background: #f0f0f0;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 0 32px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+    }
+    .site-logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: #e55a00;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .site-logo span { color: #333; }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: #f0f0f0;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #333;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .back-link:hover { opacity: 0.75; }
+    .back-link svg { flex-shrink: 0; }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-save-img {
+      padding: 9px 22px;
+      border: 1.5px solid #333;
+      border-radius: 24px;
+      background: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-save-img:hover { background: #f5f5f5; }
+
+    .btn-print {
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid #333;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-print:hover { background: #f5f5f5; }
+
+    /* ── CARD ── */
+    .page-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px 60px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 40px 48px;
+    }
+
+    /* ── CARD HEADER ── */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 32px;
+    }
+    .card-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #111;
+    }
+    .order-no {
+      font-size: 14px;
+      color: #888;
+    }
+    .order-no a {
+      color: #555;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* ── AMOUNT BOX ── */
+    .amount-box {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 28px 32px 24px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+    .amount-box .big-amount {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+    .amount-info-row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 14px;
+    }
+    .amount-info-row:last-child { margin-bottom: 0; }
+    .amount-info-label {
+      color: #555;
+      line-height: 1.5;
+    }
+    .amount-info-value {
+      font-weight: 600;
+      color: #111;
+    }
+
+    /* ── DETAILS TABLE ── */
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 36px;
+    }
+    .details-table tr {
+      border-bottom: 1px solid #ebebeb;
+    }
+    .details-table tr:first-child {
+      border-top: 1px solid #ebebeb;
+    }
+    .details-table td {
+      padding: 16px 20px;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .details-table td:first-child {
+      width: 48%;
+      color: #555;
+      font-weight: 400;
+    }
+    .details-table td:last-child {
+      color: #111;
+      font-weight: 600;
+    }
+
+    /* Citibank logo inline */
+    .citibank-logo {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .citibank-logo .citi-arc {
+      color: #003b70;
+    }
+    .citibank-logo .citi-bank {
+      color: #003b70;
+    }
+    .citibank-logo .citi-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #e55a00;
+      margin: 0 1px 0 0;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+
+    .remark-order {
+      font-size: 14px;
+      font-weight: 600;
+      color: #111;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .remark-note {
+      font-size: 13px;
+      color: #666;
+      font-weight: 400;
+    }
+
+    /* ── NOTICE ── */
+    .notice-section {
+      margin-top: 8px;
+    }
+    .notice-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 14px;
+    }
+    .notice-list {
+      list-style: disc;
+      padding-left: 20px;
+    }
+    .notice-list li {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    /* ── SUPPORT BUTTON ── */
+    .support-btn {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: #4a90d9;
+      border-radius: 50% 0 0 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+    }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      body { background: #fff; }
+      .site-header, .top-bar, .support-btn { display: none !important; }
+      .page-wrap { padding: 20px; }
+      .card { box-shadow: none; border: none; padding: 0; }
+    }
+    .logo {
+      float: inline-start;
+      margin-top: 9px;
+      margin-inline-start: 5px;
+      width: 210px;
+      height: 38px;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDYxIiBoZWlnaHQ9IjU2IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNjQuOTMgNDEuOTcxYzUuNzU3LTguMTA3IDE1LjczMy0yMC4yMjYgMTUuMjc0LTI4LjIyMkM3OS43ODIgMy4zMDEgNjguOTE5LS4xMDEgNTguMTM0LjAwMiA1MC42Mi4xMDEgNDMuMDc0IDIuMjUgMzcuOTgxIDQuMTQ4Yy0xNy41ODQgNi40NS0yNy45NjUgMTYuNzk3LTMzLjk3IDI4LjI0NS02LjQ2IDExLjM0OC0yLjc3NCAyMi4xOTUgMTMuNDU1IDIyLjU0NSAxMC45MDQtLjQ0IDE4LjE3OC0zLjE2OSAyNS4yMDItNi43NTUuMzgtLjE5NC4xNjYtLjc3My0uMjQ5LS42NjktNi40OTQgMS42MTItMjEuNTU1IDQuNzA3LTI4LjU3LjkyNi0uMDEtLjAwMS0uMDI3LS4wMDgtLjA0LS4wMS0uOTM0LS41LTEuOTc1LTEuMjA3LTIuNDI1LTMuMTI3LS40ODUtNC4wNSA1LjgwMi04LjI0OCA5LjQyMS05LjU5OWwtLjc1LTcuMDE3YzIuODkgMS4wOCA1Ljk3IDEuNjc2IDkuMTI3IDEuNjc2IDUuOTg5IDAgMTEuMjQ2LTIuMTM3IDE1LjE0NC01LjY4My4yNDQuNTcuNDM4IDEuMjEyLjU0NCAxLjkzNmgxLjdjLjAyNS0xLjgwMS0xLjEzNS0zLjIyOC0xLjEzNS0zLjIyOC0xLjc4Mi0yLjQyNC00LjQ0NC0yLjM4MS00LjQ0NC0yLjM4MXMxLjI2LjU5NiAyLjM2IDIuMDE0Yy05LjAxNiA3Ljk3OC0yMC4yOTggNC4wNS0yMC4yOTggNC4wNWw0LjY0My01LjE2My0xLjk2Mi00YzEwLjcyNC0zLjg5OSAxOS43NjMtNi44OTkgMzQuNzMtOS41NDZMNTYuNzQxIDUuNTFsMS42NjUtMS4wOTdjOS40NTkgMi41OSAxNS42NzMgNC40OTYgMTUuODg3IDkuMzU3LS4wNjYuODEtLjI0IDEuNzQ1LS42MiAyLjgyNi0yLjEwNiA1LjMtOS4xMzEgMTQuMTQ3LTExLjk1NCAxNy44NDctMS44NjcgMi40NDgtMy42ODggNC44NS00LjkzMSA3LjE1LTEuMjg5IDIuMy0xLjk5OCA0LjQ0Ni0xLjgyOCA2LjQ5Ny0uMDk1IDEyLjAxNCAyMS4zNyAxLjk2NCAzMS4wNjYtNC41MDEuMzEyLS4yMDguMDcyLS42ODgtLjI4NC0uNTY5LTI3LjIzIDkuMDUtMjAuODEyLTEuMDQ5LTIwLjgxMi0xLjA0OVoiIGZpbGw9IiNGNjAiLz48ZyBjbGlwLXBhdGg9InVybCgjYSkiIGZpbGw9IiNGNjAiPjxwYXRoIGQ9Ik02NC4zNTQgNDIuMTE2YzUuNzcyLTguMTI1IDE1Ljc3NS0yMC4yNzIgMTUuMzE0LTI4LjI4N0M3OS4yNDYgMy4zNTcgNjguMzUyLS4wNTMgNTcuNTM4LjA1Yy03LjUzNS4xLTE1LjEgMi4yNTQtMjAuMjA3IDQuMTU2QzE5LjcgMTAuNjcgOS4yOSAyMS4wNDIgMy4yNjkgMzIuNTE1LTMuMjA3IDQzLjg4OS40ODggNTQuNzYxIDE2Ljc2MSA1NS4xMTJjMTAuOTM0LS40NCAxOC4yMjgtMy4xNzYgMjUuMjctNi43Ny4zODItLjE5NS4xNjctLjc3NS0uMjUtLjY3MS02LjUxMSAxLjYxNS0yMS42MTQgNC43MTgtMjguNjQ2LjkyOC0uMDEyLS4wMDEtLjAyOC0uMDA4LS4wNC0uMDEtLjkzOC0uNS0xLjk4Mi0xLjIxLTIuNDMzLTMuMTMzLS40ODYtNC4wNiA1LjgxOC04LjI2OCA5LjQ0Ny05LjYyMWwtLjc1My03LjAzM2MyLjg5OCAxLjA4MyA1Ljk4NyAxLjY4IDkuMTUzIDEuNjggNi4wMDQgMCAxMS4yNzYtMi4xNDIgMTUuMTg0LTUuNjk2LjI0NC41NzIuNDM5IDEuMjE0LjU0NSAxLjk0aDEuNzA1Yy4wMjQtMS44MDYtMS4xMzgtMy4yMzYtMS4xMzgtMy4yMzYtMS43ODctMi40My00LjQ1NS0yLjM4Ny00LjQ1NS0yLjM4N3MxLjI2My41OTggMi4zNjYgMi4wMmMtOS4wNDEgNy45OTYtMjAuMzUzIDQuMDU5LTIwLjM1MyA0LjA1OWw0LjY1NS01LjE3Ni0xLjk2OC00LjAxYzEwLjc1NC0zLjkwNiAxOS44MTYtNi45MTQgMzQuODIzLTkuNTY3bC0zLjczLTIuODU5IDEuNjctMS4xYzkuNDgzIDIuNTk2IDE1LjcxNCA0LjUwOCAxNS45MjggOS4zOGExMS4yIDExLjIgMCAwIDEtLjYyMSAyLjgzMWMtMi4xMTIgNS4zMTItOS4xNTYgMTQuMTgtMTEuOTg3IDE3Ljg4OS0xLjg3IDIuNDUzLTMuNjk4IDQuODYtNC45NDQgNy4xNjYtMS4yOTIgMi4zMDUtMi4wMDQgNC40NTYtMS44MzIgNi41MTItLjA5NiAxMi4wNCAyMS40MjggMS45NjggMzEuMTQ5LTQuNTEyLjMxMy0uMjA4LjA3My0uNjg5LS4yODUtLjU3LTI3LjMwMyA5LjA3LTIwLjg2OC0xLjA1LTIwLjg2OC0xLjA1Wm0yNjYuNDc3IDcuNzU0Yy0uNTYxLS4xOS0uOTY1LS41NjMtMS4yMTQtMS4xMjMtLjI1LS41NjItLjM3NC0xLjQyMy0uMzc0LTIuNTkgMC0xLjYyLjI3OS0yLjY3Ljg0LTMuMTQ4LjU2MS0uNDc2IDEuNjEtLjcxNiAzLjE0OC0uNzE2IDEuNTM3IDAgMi41ODcuMjQgMy4xNDcuNzE2LjU2MS40NzkuODQyIDEuNTI4Ljg0MiAzLjE0OXMtLjI4MSAyLjc0NC0uODQyIDMuMjQzYy0uNTYxLjQ5OS0xLjYxLjc0OS0zLjE0Ny43NDktMS4wMzkgMC0xLjgzOS0uMDk1LTIuNC0uMjhaTTE0Ny40MTkgNS4wMWg5LjkyNXY0NS4xMTNoLTkuOTI1VjUuMDFabTE2Ljg4NiAzLjk5NWMwLTQuNjM4Ljk1LTQuOTk1IDUuNDA5LTQuOTk1czUuNDA5LjM1NyA1LjQwOSA0Ljk5NS0uODkyIDUuMTE0LTUuNDA5IDUuMTE0Yy00LjUxNyAwLTUuNDA5LS41MzUtNS40MDktNS4xMTRabS40NzYgOC40M2g5Ljg2N1Y1MC4xNWgtOS44NjdWMTcuNDM2Wm00OS4yMzEgMTYuNjQ5YzAgOS4zMzQtMi4zNzggMTYuNjQ3LTEyLjY2MSAxNi42NDctNi4wNjIgMC04LjQzOS0xLjg0Mi05LjYyOC00LjY5N2wtLjU5NSA0LjEwM2gtOS4wMzRWNC45NWg5Ljg2N3YxNi4yOTFjMS4zMDgtMS45MDIgMy45MjMtMy44MDUgOS4zOS0zLjgwNSAxMC4yODMgMCAxMi42NjEgNi4zNjIgMTIuNjYxIDE2LjY0OFptLTEwLjA0NSAwYzAtNS41ODktLjgzMi05LjQ1My02LjA2My05LjQ1M3MtNi40NzggMy4zODktNi40NzggOS40NTNjMCA2LjA2MyAxLjI0NyA5LjMzNCA2LjQ3OCA5LjMzNCA1LjIzIDAgNi4wNjMtNC4xMDMgNi4wNjMtOS4zMzRabTQ0LjI1OC02LjAxOHYyMi4wNmgtOC44NTdsLS44MzEtMy4zOWMtMS4yNDkgMi4wMjItNC4zOTkgMy45ODQtOS44NjcgMy45ODQtNi45NTUgMC0xMC45MzctMy4xNS0xMC45MzctOS44NyAwLTcuNDMyIDQuMzk5LTEwLjEwNyAxMy4zMTQtMTAuMTA3aDcuMzd2LS4xNzhjMC0zLjgwNi0xLjEyOS00LjgxNy02LjQ3OC00LjgxNy0yLjMxOCAwLTUuODk3LjE3OC04LjAzNy41MzV2LTguMjY1YzIuNDM3LS4zNTYgNy4wMjctLjUzNSA5LjI4NS0uNTM1IDEwLjk5NSAwIDE1LjAzNyAzLjUwOSAxNS4wMzcgMTAuNTgzaC4wMDFabS05LjgwOCAxMi4zMDl2LTMuMjExaC01LjY0NmMtMy45MjIgMC01LjQwOS42NTQtNS40MDkgMy4yNyAwIDIuMDgxIDEuMzY3IDIuODUzIDQuMTYxIDIuODUzIDMuNDQ3IDAgNS45NDQtMS4yNDggNi44OTQtMi45MTN2LjAwMVptNDkuMTY5LTYuMzAzYzAgOS4zMzUtMi4zNzggMTYuNjQ4LTEyLjY2MSAxNi42NDgtNi4wNjIgMC04LjQzOS0xLjg0My05LjYyNy00LjY5N2wtLjU5NSA0LjEwM2gtOS4wMzVWNC45MzloOS44Njd2MTYuMjljMS4zMDgtMS45MDEgMy45MjMtMy44MDUgOS4zOS0zLjgwNSAxMC4yODQgMCAxMi42NjEgNi4zNjMgMTIuNjYxIDE2LjY0OFptLTEwLjA0NSAwYzAtNS41ODgtLjgzMi05LjQ1Mi02LjA2My05LjQ1MlMyNjUgMjguMDA4IDI2NSAzNC4wNzJzMS4yNDggOS4zMzUgNi40NzggOS4zMzVjNS4yMyAwIDYuMDYzLTQuMTAzIDYuMDYzLTkuMzM1Wm0tMTQ5LjI4OSA1LjU5NWgtMTYuMTY3bC0zLjI2OSAxMC4zODRIOTguMDU5bDE1LjI3NC00NS4wNEgxMjcuM2wxNS4xNTcgNDUuMDRoLTEwLjk5NmwtMy4yMDktMTAuMzg0Wm0tMi44NTQtOS4yMTYtNC44MTQtMTUuNjRoLS43MTNsLTQuOTMzIDE1LjY0aDEwLjQ2Wm0xOTYuNDAxLTIuMzg0djIyLjA2aC04Ljg1N2wtLjgzMS0zLjM5Yy0xLjI0OSAyLjAyMi00LjM5OSAzLjk4NC05Ljg2NiAzLjk4NC02Ljk1NiAwLTEwLjkzOC0zLjE1LTEwLjkzOC05Ljg3IDAtNy40MzMgNC4zOTktMTAuMTA3IDEzLjMxNC0xMC4xMDdoNy4zNzF2LS4xNzljMC0zLjgwNS0xLjEzLTQuODE2LTYuNDc4LTQuODE2LTIuMzE5IDAtNS44OTguMTc4LTguMDM4LjUzNFYxOC4wMmMyLjQzNy0uMzU3IDcuMDI3LS41MzUgOS4yODUtLjUzNSAxMC45OTUgMCAxNS4wMzcgMy41MDkgMTUuMDM3IDEwLjU4M2guMDAxWm0tOS44MDcgMTIuMzA5di0zLjIxMWgtNS42NDdjLTMuOTIxIDAtNS40MDguNjU0LTUuNDA4IDMuMjcgMCAyLjA4IDEuMzY2IDIuODUzIDQuMTYgMi44NTMgMy40NDcgMCA1Ljk0NC0xLjI0OSA2Ljg5NS0yLjkxM1ptMzAuMTkxLTYuNTY4YzAtNC4zMTEuNjQ1LTcuNzA2IDEuOTM0LTEwLjE4NCAxLjI4OS0yLjQ3OCAzLjEzMy00LjIyMSA1LjUzMS01LjIyOCAyLjM5Ni0xLjAwNyA1LjQyOC0xLjUxMiA5LjA5Ni0xLjUxMiAxLjUzIDAgMy4wNTIuMDkxIDQuNTYyLjI3MiAxLjUxMS4xODIgMi43OS40MTQgMy44MzguNjk1djguNDAxYy0yLjAxNS0uNzY0LTQuMjkxLTEuMTQ4LTYuODMtMS4xNDgtMi42OTkgMC00LjY2NC42MjUtNS44OTIgMS44NzMtMS4yMyAxLjI1LTEuODQ0IDMuNTI3LTEuODQ0IDYuODMgMCAyLjI1Ny4yODIgNCAuODQ3IDUuMjI4LjU2MyAxLjIzIDEuNDIgMi4wOTYgMi41NjggMi42IDEuMTQ5LjUwNCAyLjY2OS43NTUgNC41NjMuNzU1IDIuNTM5IDAgNC44NTUtLjM4MiA2Ljk1MS0xLjE0OXY4LjIyYy0uOTY4LjM2My0yLjI4OC42NjUtMy45NTkuOTA3YTMzLjYyMiAzMy42MjIgMCAwIDEtNC44MDQuMzYzYy0zLjY2OCAwLTYuNy0uNTA1LTkuMDk2LTEuNTEyLTIuMzk4LTEuMDA2LTQuMjQyLTIuNzUtNS41MzEtNS4yMjctMS4yODktMi40NzgtMS45MzQtNS44NzMtMS45MzQtMTAuMTg1di4wMDFabTMwLjI4NyAwYzAtNC4zNTEuNjM1LTcuNzU2IDEuOTA1LTEwLjIxNSAxLjI2OC0yLjQ1NyAzLjA4Mi00LjE5IDUuNDM5LTUuMTk3IDIuMzU4LTEuMDA3IDUuMzY5LTEuNTEyIDkuMDM2LTEuNTEyczYuNjI3LjUwNSA5LjAwNSAxLjUxMmMyLjM3OCAxLjAwNyA0LjE5IDIuNzQgNS40NCA1LjE5NyAxLjI0OCAyLjQ1OSAxLjg3MyA1Ljg2MyAxLjg3MyAxMC4yMTUgMCA0LjM1Mi0uNjI1IDcuNzU3LTEuODczIDEwLjIxNC0xLjI1IDIuNDU5LTMuMDYzIDQuMTkyLTUuNDQgNS4xOTgtMi4zNzggMS4wMDctNS4zNzkgMS41MTEtOS4wMDUgMS41MTEtMy42MjYgMC02LjY3OS0uNTA0LTkuMDM2LTEuNTEtMi4zNTctMS4wMDctNC4xNy0yLjc0LTUuNDM5LTUuMTk5LTEuMjctMi40NTctMS45MDUtNS44NjItMS45MDUtMTAuMjE0Wm0xNi4zOCA5LjM2OGMxLjU3MSAwIDIuNzgtLjI4MiAzLjYyNi0uODQ3Ljg0Ny0uNTYzIDEuNDUxLTEuNTEgMS44MTMtMi44NC4zNjMtMS4zMy41NDQtMy4yMjMuNTQ0LTUuNjgxcy0uMTgxLTQuMzYxLS41NDQtNS43MTFjLS4zNjItMS4zNS0uOTc3LTIuMzE3LTEuODQzLTIuOTAyLS44NjctLjU4NC0yLjA2NS0uODc3LTMuNTk2LS44NzctMS41MzEgMC0yLjc4MS4yOTMtMy42MjYuODc3LS44NDcuNTg1LTEuNDUxIDEuNTUyLTEuODE0IDIuOTAyLS4zNjIgMS4zNS0uNTQzIDMuMjU0LS41NDMgNS43MTEgMCAyLjQ1Ny4xODEgNC4zNTEuNTQzIDUuNjgxLjM2MyAxLjMzLjk3NyAyLjI3NyAxLjg0NCAyLjg0Ljg2Ni41NjUgMi4wNjQuODQ3IDMuNTk2Ljg0N1pNNDYxIDI4LjgyNVY1MC4wNWgtMTAuMTkxVjMwLjM5MmMwLTIuMDUtLjMzMi0zLjQ1Ny0uOTk1LTQuMjIxLS42NjMtLjc2NC0xLjc5OS0xLjE0Ni0zLjQwNy0xLjE0NnMtMi44MTQuMzMyLTMuNjE4Ljk5NmMtLjgwNS42NjMtMS4zNjcgMS43MzktMS42ODkgMy4yMjZWNTAuMDVoLTEwLjE5MVYzMC4zOTJjMC0yLjA1LS4zNTItMy40NTctMS4wNTUtNC4yMjEtLjcwNC0uNzY0LTEuODItMS4xNDYtMy4zNDctMS4xNDYtMS41MjYgMC0yLjcxNC4yODItMy40MzYuODQ1LS43MjQuNTYzLTEuMjQ3IDEuNDg3LTEuNTY4IDIuNzczVjUwLjA1aC0xMC4xMzFWMTcuNDg4aDEwLjEzMXYzLjQ5OGMuODQ0LTEuMzI3IDEuOTktMi4zNDEgMy40MzctMy4wNDYgMS40NDctLjcwMyAzLjMzNi0xLjA1NSA1LjY2OC0xLjA1NSAyLjMzMiAwIDQuMzExLjM1MiA1LjgxOSAxLjA1NSAxLjUwOC43MDQgMi42NDQgMS43OCAzLjQwOCAzLjIyNiAxLjY0OC0yLjg1NCA1LjA0NC00LjI4IDEwLjE5MS00LjI4IDMuNjk4IDAgNi40NTIuOTI0IDguMjYxIDIuNzczIDEuODA5IDEuODUgMi43MTQgNC45MDUgMi43MTQgOS4xNjZINDYxWiIvPjwvZz48ZGVmcz48Y2xpcFBhdGggaWQ9ImEiPjxwYXRoIGZpbGw9IiNmZmYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC4yNSAuMDQ4KSIgZD0iTTAgMGg0NjAuNzV2NTUuMDY0SDB6Ii8+PC9jbGlwUGF0aD48L2RlZnM+PC9zdmc+);
+      background-size: auto 20px;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-size: 0;
+    }
+
+    .checkout-payment-icon-medium {
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <a class="logo" href="#"></a>
+  </header>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <a class="back-link" href="javascript:history.back()">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+      Wire transfer account information
+    </a>
+    <div class="top-actions">
+      <button class="btn-save-img" onclick="saveAsImage()">Save as image</button>
+      <button class="btn-print" onclick="window.print()" title="Print">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <polyline points="6 9 6 2 18 2 18 9"/>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+          <rect x="6" y="14" width="12" height="8"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN CARD -->
+  <div class="page-wrap">
+    <div class="card" id="transfer-card">
+
+      <!-- Card Header -->
+      <div class="card-header">
+        <h1 class="card-title">International transfer</h1>
+        <div class="order-no">Order No. <a href="#">#<%= order_id %></a></div>
+      </div>
+
+      <!-- Amount Box -->
+      <div class="amount-box">
+        <div class="big-amount"><%= currency %> <%= Number(amount + shipping_fee + process_fee).toLocaleString('en-US', { minimumFractionDigits: 2 }) %></div>
+        <div class="amount-info-row">
+          <span class="amount-info-label">Payment processing fee<br>charged by your bank:</span>
+          <span class="amount-info-value"><%= currency %> <%= process_fee %> (estimated)</span>
+        </div>
+        <div class="amount-info-row">
+          <span class="amount-info-label">Processing time:</span>
+          <span class="amount-info-value">3 - 7 business days</span>
+        </div>
+        <div class="amount-info-row">
+          <span class="amount-info-label">Payment currency:</span>
+          <span class="amount-info-value"><%= currency %></span>
+        </div>
+      </div>
+
+      <!-- Details Table -->
+      <table class="details-table">
+        <tbody>
+          <tr>
+            <td>Payment currency:</td>
+            <td><%= payment_currency %></td>
+          </tr>
+          <tr>
+            <td>Beneficiary account number:</td>
+            <td><%= beneficiary_account_number %></td>
+          </tr>
+          <tr>
+            <td>SWIFT code:</td>
+            <td><%= swift_code %></td>
+          </tr>
+          <tr>
+            <td>Beneficiary country/region:</td>
+            <td><%= beneficiary_country_region %></td>
+          </tr>
+          <tr>
+            <td>Beneficiary name:</td>
+            <td><%= beneficiary_name %></td>
+          </tr>
+          <tr>
+            <td>Beneficiary address:</td>
+            <td><%= beneficiary_address %></td>
+          </tr>
+          <tr>
+            <td>Beneficiary bank:</td>
+            <td>
+              <%= beneficiary_bank %>
+              <!-- Citibank styled logo -->
+              <img 
+                data-i18n-appname="" 
+                data-i18n-ns="" 
+                data-i18n-key="checkout.payment-icon.citibank" 
+                src="https://s.alicdn.com/@img/tfs/TB1UtDLNSzqK1RjSZPxXXc4tVXa-137-40.svg" 
+                class="checkout-payment-icon-medium logo-citi"
+              >
+            </td>
+          </tr>
+          <tr>
+            <td>Beneficiary bank address:</td>
+            <td><%= beneficiary_bank_address %></td>
+          </tr>
+          <tr>
+            <td>Bank code:</td>
+            <td><%= bank_code %></td>
+          </tr>
+          <tr>
+            <td>Branch code:</td>
+            <td><%= branch_code %></td>
+          </tr>
+          <tr>
+            <td>Remark:</td>
+            <td>
+              <span class="remark-order"><%= remark %></span>
+              <span class="remark-note">*Please attach this order number</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Notice -->
+      <div class="notice-section">
+        <div class="notice-title">Notice</div>
+        <ul class="notice-list">
+          <li>
+            You will ONLY be covered by Trade Assurance when you make a payment to this supplier's account shown above.
+            Please pay attention to fill in the correct Beneficiary Account Number, as the beneficiary bank will review the beneficiary account number to receive the payment.<br>
+            The details of telegraphic transfer, including but not limited to beneficiary name, account number, address, SWIFT code and processing time shown on this page are furnished by Citibank National Association ("Bank"), which are subject to change by the Bank at any time.
+          </li>
+        </ul>
+      </div>
+
+    </div><!-- /card -->
+  </div><!-- /page-wrap -->
+
+  <!-- Support button -->
+  <div class="support-btn">
+    <svg width="20" height="20" fill="#fff" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z"/>
+    </svg>
+  </div>
+
+  <script>
+    async function saveAsImage() {
+      const card = document.getElementById('transfer-card');
+      const btn  = document.querySelector('.btn-save-img');
+
+      btn.textContent = 'Saving…';
+      btn.disabled = true;
+
+      try {
+        const canvas = await html2canvas(card, {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#ffffff',
+          logging: false
+        });
+
+        const link = document.createElement('a');
+        link.download = 'wire-transfer-<%= order_id %>.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      } catch (err) {
+        console.error('Save as image failed:', err);
+        alert('Could not save image. Please try the print/screenshot option.');
+      } finally {
+        btn.textContent = 'Save as image';
+        btn.disabled = false;
+      }
+    }
+  </script>
+
+</body>
+</html>

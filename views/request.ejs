@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Details</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container py-5">
+
+    <div class="card shadow">
+        <div class="card-header">
+            <h3>Create Details</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form action="/hsisau3937enk" method="POST">
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Amount</label>
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="amount"
+                            class="form-control"
+                            required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Currency</label>
+                        <select name="currency" class="form-select" required>
+                            <option value="">Select Currency</option>
+                            <option>USD</option>
+                            <option>EUR</option>
+                            <option>GBP</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Seller</label>
+                    <input
+                        type="text"
+                        name="seller"
+                        class="form-control"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Product Name</label>
+                    <input
+                        type="text"
+                        name="product_name"
+                        class="form-control"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Product Specs</label>
+                    <textarea
+                        name="specs"
+                        rows="4"
+                        class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Image Link</label>
+                    <input
+                        type="text"
+                        name="image_link"
+                        class="form-control"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Order Date</label>
+                    <input
+                        type="date"
+                        name="order_date"
+                        class="form-control"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Order Time</label>
+                    <input
+                        type="time"
+                        name="order_time"
+                        class="form-control"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Quantity</label>
+                    <input
+                        type="number"
+                        name="quantity"
+                        min="1"
+                        class="form-control"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Shipping Address</label>
+                    <textarea
+                        name="shipping_address"
+                        rows="3"
+                        class="form-control"
+                        required></textarea>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Ship From</label>
+                        <input
+                            type="text"
+                            name="ship_from"
+                            class="form-control">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Shipping Method</label>
+                        <input
+                            type="text"
+                            name="shipping_method"
+                            class="form-control">
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Shipping Fee</label>
+                    <input
+                        type="number"
+                        step="0.01"
+                        name="shipping_fee"
+                        class="form-control">
+                </div>
+
+                <hr>
+
+                <h5>Company Information/ Personal Information</h5>
+
+                <div class="mb-3">
+                    <label class="form-label">Company Phone Number</label>
+                    <input
+                        type="text"
+                        name="company_phone_number"
+                        class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Company Email</label>
+                    <input
+                        type="email"
+                        name="company_email"
+                        class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Company Address</label>
+                    <textarea
+                        name="company_address"
+                        rows="3"
+                        class="form-control"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Contact Name</label>
+                    <input
+                        type="text"
+                        name="contact_name"
+                        class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Buyer Name</label>
+                    <input
+                        type="text"
+                        name="buyer_name"
+                        class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Buyer Email</label>
+                    <input
+                        type="email"
+                        name="buyer_email"
+                        class="form-control">
+                </div>
+                <hr>
+
+<h5>Beneficiary / Payment Information</h5>
+
+<div class="row">
+
+    <div class="col-md-6 mb-3">
+        <label class="form-label">Payment Currency</label>
+        <select name="payment_currency" class="form-select">
+            <option value="">Select Currency</option>
+            <option>USD</option>
+            <option>EUR</option>
+            <option>GBP</option>
+            <option>NGN</option>
+            <option>CNY</option>
+            <option>AED</option>
+        </select>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label class="form-label">Process Fee</label>
+        <input
+            type="number"
+            step="0.01"
+            name="process_fee"
+            class="form-control">
+    </div>
+    <div class="col-md-6 mb-3">
+        <label class="form-label">Trade Assurance Amount</label>
+        <input
+            type="number"
+            step="0.01"
+            name="trade_assurance_amount"
+            class="form-control">
+    </div>
+
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Beneficiary Name</label>
+    <input
+        type="text"
+        name="beneficiary_name"
+        class="form-control">
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Beneficiary Account Number</label>
+    <input
+        type="text"
+        name="beneficiary_account_number"
+        class="form-control">
+</div>
+
+<div class="mb-3">
+    <label class="form-label">SWIFT Code</label>
+    <input
+        type="text"
+        name="swift_code"
+        class="form-control">
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Beneficiary Country / Region</label>
+    <input
+        type="text"
+        name="beneficiary_country_region"
+        class="form-control">
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Beneficiary Address</label>
+    <textarea
+        name="beneficiary_address"
+        rows="3"
+        class="form-control"></textarea>
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Beneficiary Bank</label>
+    <input
+        type="text"
+        name="beneficiary_bank"
+        class="form-control">
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Beneficiary Bank Address</label>
+    <textarea
+        name="beneficiary_bank_address"
+        rows="3"
+        class="form-control"></textarea>
+</div>
+
+<div class="row">
+
+    <div class="col-md-6 mb-3">
+        <label class="form-label">Bank Code</label>
+        <input
+            type="text"
+            name="bank_code"
+            class="form-control">
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label class="form-label">Branch Code</label>
+        <input
+            type="text"
+            name="branch_code"
+            class="form-control">
+    </div>
+
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Remark</label>
+    <textarea
+        name="remark"
+        rows="4"
+        class="form-control"></textarea>
+</div>
+
+                <button class="btn btn-primary">
+                    Submit Order
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="card-footer">
+            <% if (errors && errors.length) { %>
+
+                <div class="alert alert-danger">
+                
+                    <strong>Please correct the following:</strong>
+                
+                    <ul class="mb-0">
+                
+                        <% errors.forEach(error => { %>
+                
+                            <li><%= error %></li>
+                
+                        <% }) %>
+                
+                    </ul>
+                
+                </div>
+                
+                <% } %>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

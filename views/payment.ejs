@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manufacturers, Suppliers, Exporters & Importers from the world's largest online B2B marketplace-Alibaba.com</title>
+<link rel="shortcut icon" href="https://is.alicdn.com/favicon.ico" type="image/x-icon" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      color: #333;
+      background: #f0f0f0;
+      min-height: 100vh;
+    }
+    .site-header {
+      border-bottom: 1px solid #e8e8e8;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* ── PAGE LAYOUT ── */
+    .page-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* ── LEFT PANEL ── */
+    .payment-panel {
+      background: #fff;
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    /* ── PAYMENT METHOD LIST ── */
+    .method-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+      position: relative;
+    }
+    .method-item:last-child { border-bottom: none; }
+
+    /* Radio */
+    .radio {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s;
+    }
+    .radio.checked {
+      border-color: #333;
+    }
+    .radio.checked::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #333;
+    }
+    .radio.disabled {
+      border-color: #ddd;
+    }
+
+    /* Method icon area */
+    .method-icon {
+      background-color: #f8f8f8;
+      border-radius: 4px;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      height: 32px;
+      margin-inline-end: 16px;
+      position: relative;
+      inline-size: 48px;
+      display: flex;    
+      align-items: center;
+      justify-content: center;
+    }
+    .method-icon img {
+      width: 100%;
+    }
+
+    /* Method label */
+    .method-label {
+      flex: 1;
+    }
+    .method-name {
+      font-size: 15px;
+      font-weight: 500;
+      color: #333;
+    }
+    .method-name.disabled { color: #aaa; }
+    .method-sub {
+      font-size: 13px;
+      color: #999;
+      margin-top: 2px;
+    }
+
+    /* Card logos row */
+    .card-logos {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-left: 4px;
+    }
+    .card-logo {
+      height: 20px;
+      border-radius: 3px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 0 4px;
+    }
+    .logo-visa { background: #1a1f71; color: #fff; font-style: italic; font-size: 11px; padding: 0 5px; }
+    .logo-mc { background: transparent; }
+    .logo-amex { background: #016fd0; color: #fff; font-size: 8px; }
+    .logo-diners { background: #fff; border: 1px solid #ccc; color: #004b87; font-size: 8px; }
+    .logo-discover { background: #fff; border: 1px solid #ccc; color: #e55a00; font-size: 7px; }
+    .logo-jcb { background: linear-gradient(135deg, #003087 0%, #cc0000 50%, #009a44 100%); color: #fff; font-size: 8px; }
+    .logo-generic { background: #e0e0e0; color: #555; font-size: 8px; }
+    .see-all {
+      font-size: 12px;
+      color: #555;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      white-space: nowrap;
+    }
+
+    /* ── CARD FORM (expanded) ── */
+    .card-form {
+      display: none;
+      margin-top: 16px;
+      border: 1.5px solid #333;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .card-form.active { display: block; }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .form-field {
+      position: relative;
+    }
+    .form-field input {
+      width: 100%;
+      padding: 12px 38px 12px 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #333;
+      outline: none;
+      transition: border-color 0.15s;
+      background: #fff;
+    }
+    .form-field input:focus { border-color: #333; }
+    .form-field label {
+      position: absolute;
+      top: 50%;
+      left: 14px;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: #999;
+      pointer-events: none;
+      transition: all 0.15s;
+    }
+    .form-field input:focus + label,
+    .form-field input:not(:placeholder-shown) + label {
+      top: 6px;
+      font-size: 11px;
+      transform: none;
+    }
+    .form-field input::placeholder { color: transparent; }
+    .required-star { color: #e55a00; margin-left: 2px; }
+    .field-clear {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #999;
+      font-size: 16px;
+      line-height: 1;
+    }
+    .field-eye {
+      position: absolute;
+      right: 34px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #999;
+    }
+    .field-info {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #999;
+    }
+
+    /* Checkbox row */
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #333;
+    }
+    .checkbox-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #333;
+      cursor: pointer;
+    }
+
+    /* ── PAYPAL expanded ── */
+    .paypal-expanded {
+      display: none;
+      margin-top: 0;
+    }
+    .paypal-expanded.active { display: block; }
+
+    /* ── APPLE PAY expanded ── */
+    .applepay-expanded {
+      display: none;
+      font-size: 13px;
+      color: #666;
+      margin-top: 4px;
+    }
+    .applepay-expanded.active { display: block; }
+
+    /* ── WIRE TRANSFER expanded ── */
+    .wire-expanded {
+      display: none;
+      margin-top: 12px;
+    }
+    .wire-expanded.active { display: block; }
+    .wire-desc {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 12px;
+    }
+    .wire-tabs {
+      display: flex;
+      border-bottom: 1px solid #e0e0e0;
+      margin-bottom: 16px;
+    }
+    .wire-tab {
+      padding: 8px 0;
+      margin-right: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #999;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+    .wire-tab.active {
+      color: #333;
+      border-bottom-color: #333;
+    }
+    .wire-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      font-size: 13px;
+    }
+    .wire-detail-label {
+      color: #888;
+      margin-bottom: 4px;
+    }
+    .wire-detail-value {
+      font-weight: 600;
+      color: #333;
+    }
+    .citibank-logo {
+      display: inline-flex;
+      align-items: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: #003b70;
+      letter-spacing: -0.5px;
+    }
+    .citibank-logo span { color: #e55a00; }
+
+    /* ── ACTIVE METHOD HIGHLIGHT ── */
+    .method-item.selected {
+      border: 1.5px solid #333;
+      border-radius: 8px;
+      padding: 16px;
+      margin: -1px -1px;
+    }
+    .method-item.selected + .method-item {
+      border-top: none;
+    }
+
+    /* ── SWITCH REGION ── */
+    .switch-region {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .switch-region a {
+      color: #333;
+      font-weight: 600;
+      text-decoration: underline;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .flag-bj {
+      display: inline-block;
+      width: 20px;
+      height: 14px;
+      border-radius: 1px;
+      overflow: hidden;
+      vertical-align: middle;
+      position: relative;
+      background: #008751;
+    }
+    .flag-bj::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 0;
+      width: 13px; height: 7px;
+      background: #fcd116;
+    }
+    .flag-bj::before {
+      content: '';
+      position: absolute;
+      right: 0; bottom: 0;
+      width: 13px; height: 7px;
+      background: #e8112d;
+    }
+
+    /* ── RIGHT PANEL ── */
+    .summary-panel {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .thumb-img {
+      width: 72px;
+      height: 72px;
+      background: #2a2a2a;
+      border-radius: 4px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .thumb-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .thumb-badge {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-size: 11px;
+      text-align: center;
+      padding: 3px 0;
+    }
+    .thumb-info {}
+    .order-no-link {
+      font-size: 13px;
+      color: #666;
+      text-decoration: underline;
+      cursor: pointer;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .subtotal-label {
+      font-size: 13px;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .subtotal-amount {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .subtotal-amount svg { color: #555; }
+
+    /* Payment summary */
+    .summary-body {
+      padding: 20px 16px;
+    }
+    .summary-heading {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .summary-row .label { color: #333; display: flex; align-items: center; gap: 4px; }
+    .summary-row .amount { font-weight: 600; }
+    .summary-divider {
+      border: none;
+      border-top: 1px solid #f0f0f0;
+      margin: 14px 0;
+    }
+    .summary-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .summary-total-label {
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .summary-total-label a {
+      color: #333;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+    .summary-total-amount {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    /* Pay button variants */
+    .pay-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 28px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      transition: opacity 0.15s;
+    }
+    .pay-btn:hover { opacity: 0.9; }
+    .pay-btn-orange {
+      background: #c84a00;
+      color: #fff;
+    }
+    .pay-btn-paypal {
+      background: #ffc439;
+      color: #003087;
+      font-size: 22px;
+      font-weight: 800;
+      font-style: italic;
+      letter-spacing: -0.5px;
+    }
+    .pay-btn-paypal .pp-blue { color: #003087; }
+    .pay-btn-paypal .pp-lblue { color: #009cde; }
+    .pay-btn-apple {
+      background: #000;
+      color: #fff;
+      font-size: 15px;
+    }
+    .pay-btn-continue {
+      background: #c84a00;
+      color: #fff;
+    }
+
+    .pay-disclaimer {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    /* Secure checkout */
+    .secure-section {
+      background: #f9f9f9;
+      padding: 16px;
+    }
+    .secure-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-bottom: 12px;
+    }
+    .secure-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .secure-item:last-child { margin-bottom: 0; }
+    .secure-item svg { flex-shrink: 0; margin-top: 1px; }
+    .info-circle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid #555;
+      border-radius: 50%;
+      font-size: 10px;
+      color: #555;
+      flex-shrink: 0;
+    }
+
+    /* ── SUPPORT BTN FIXED ── */
+    .support-btn {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: #4a90d9;
+      border-radius: 50% 0 0 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+    }
+
+    /* MasterCard SVG circles */
+    .mc-icon {
+      width: 32px;
+      height: 20px;
+      position: relative;
+      display: inline-block;
+    }
+    .mc-left {
+      position: absolute;
+      left: 0; top: 0;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: #eb001b;
+    }
+    .mc-right {
+      position: absolute;
+      right: 0; top: 0;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: #f79e1b;
+      mix-blend-mode: multiply;
+    }
+
+    /* PayPal logo inline */
+    .paypal-logo-inline {
+      font-size: 18px;
+      font-weight: 800;
+      font-style: italic;
+    }
+    .paypal-logo-inline .pp-dark { color: #003087; }
+    .paypal-logo-inline .pp-light { color: #009cde; }
+    .paypal-logo-inline .pp-gold { color: #f79e1b; }
+
+    /* Apple Pay logo */
+    .apple-pay-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #000;
+    }
+    .apple-pay-logo .apple-icon { font-size: 16px; }
+    .apple-pay-logo .pay-text { font-size: 13px; font-weight: 700; }
+
+    /* Google Pay logo */
+    .gpay-logo {
+      display: inline-flex;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+    }
+    .gpay-g { color: #4285f4; font-weight: 700; }
+    .gpay-o { color: #ea4335; font-weight: 700; }
+    .gpay-o2 { color: #fbbc05; font-weight: 700; }
+    .gpay-g2 { color: #34a853; font-weight: 700; }
+    .gpay-pay { color: #5f6368; font-weight: 500; }
+
+    /* T/T logo */
+    .tt-logo {
+      font-size: 16px;
+      font-weight: 800;
+      color: #003087;
+      font-style: italic;
+      letter-spacing: -1px;
+    }
+    .tt-logo .slash { color: #003087; font-weight: 300; }
+    .logo {
+      float: inline-start;
+      margin-top: 9px;
+      margin-inline-start: 5px;
+      width: 210px;
+      height: 38px;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDYxIiBoZWlnaHQ9IjU2IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNjQuOTMgNDEuOTcxYzUuNzU3LTguMTA3IDE1LjczMy0yMC4yMjYgMTUuMjc0LTI4LjIyMkM3OS43ODIgMy4zMDEgNjguOTE5LS4xMDEgNTguMTM0LjAwMiA1MC42Mi4xMDEgNDMuMDc0IDIuMjUgMzcuOTgxIDQuMTQ4Yy0xNy41ODQgNi40NS0yNy45NjUgMTYuNzk3LTMzLjk3IDI4LjI0NS02LjQ2IDExLjM0OC0yLjc3NCAyMi4xOTUgMTMuNDU1IDIyLjU0NSAxMC45MDQtLjQ0IDE4LjE3OC0zLjE2OSAyNS4yMDItNi43NTUuMzgtLjE5NC4xNjYtLjc3My0uMjQ5LS42NjktNi40OTQgMS42MTItMjEuNTU1IDQuNzA3LTI4LjU3LjkyNi0uMDEtLjAwMS0uMDI3LS4wMDgtLjA0LS4wMS0uOTM0LS41LTEuOTc1LTEuMjA3LTIuNDI1LTMuMTI3LS40ODUtNC4wNSA1LjgwMi04LjI0OCA5LjQyMS05LjU5OWwtLjc1LTcuMDE3YzIuODkgMS4wOCA1Ljk3IDEuNjc2IDkuMTI3IDEuNjc2IDUuOTg5IDAgMTEuMjQ2LTIuMTM3IDE1LjE0NC01LjY4My4yNDQuNTcuNDM4IDEuMjEyLjU0NCAxLjkzNmgxLjdjLjAyNS0xLjgwMS0xLjEzNS0zLjIyOC0xLjEzNS0zLjIyOC0xLjc4Mi0yLjQyNC00LjQ0NC0yLjM4MS00LjQ0NC0yLjM4MXMxLjI2LjU5NiAyLjM2IDIuMDE0Yy05LjAxNiA3Ljk3OC0yMC4yOTggNC4wNS0yMC4yOTggNC4wNWw0LjY0My01LjE2My0xLjk2Mi00YzEwLjcyNC0zLjg5OSAxOS43NjMtNi44OTkgMzQuNzMtOS41NDZMNTYuNzQxIDUuNTFsMS42NjUtMS4wOTdjOS40NTkgMi41OSAxNS42NzMgNC40OTYgMTUuODg3IDkuMzU3LS4wNjYuODEtLjI0IDEuNzQ1LS42MiAyLjgyNi0yLjEwNiA1LjMtOS4xMzEgMTQuMTQ3LTExLjk1NCAxNy44NDctMS44NjcgMi40NDgtMy42ODggNC44NS00LjkzMSA3LjE1LTEuMjg5IDIuMy0xLjk5OCA0LjQ0Ni0xLjgyOCA2LjQ5Ny0uMDk1IDEyLjAxNCAyMS4zNyAxLjk2NCAzMS4wNjYtNC41MDEuMzEyLS4yMDguMDcyLS42ODgtLjI4NC0uNTY5LTI3LjIzIDkuMDUtMjAuODEyLTEuMDQ5LTIwLjgxMi0xLjA0OVoiIGZpbGw9IiNGNjAiLz48ZyBjbGlwLXBhdGg9InVybCgjYSkiIGZpbGw9IiNGNjAiPjxwYXRoIGQ9Ik02NC4zNTQgNDIuMTE2YzUuNzcyLTguMTI1IDE1Ljc3NS0yMC4yNzIgMTUuMzE0LTI4LjI4N0M3OS4yNDYgMy4zNTcgNjguMzUyLS4wNTMgNTcuNTM4LjA1Yy03LjUzNS4xLTE1LjEgMi4yNTQtMjAuMjA3IDQuMTU2QzE5LjcgMTAuNjcgOS4yOSAyMS4wNDIgMy4yNjkgMzIuNTE1LTMuMjA3IDQzLjg4OS40ODggNTQuNzYxIDE2Ljc2MSA1NS4xMTJjMTAuOTM0LS40NCAxOC4yMjgtMy4xNzYgMjUuMjctNi43Ny4zODItLjE5NS4xNjctLjc3NS0uMjUtLjY3MS02LjUxMSAxLjYxNS0yMS42MTQgNC43MTgtMjguNjQ2LjkyOC0uMDEyLS4wMDEtLjAyOC0uMDA4LS4wNC0uMDEtLjkzOC0uNS0xLjk4Mi0xLjIxLTIuNDMzLTMuMTMzLS40ODYtNC4wNiA1LjgxOC04LjI2OCA5LjQ0Ny05LjYyMWwtLjc1My03LjAzM2MyLjg5OCAxLjA4MyA1Ljk4NyAxLjY4IDkuMTUzIDEuNjggNi4wMDQgMCAxMS4yNzYtMi4xNDIgMTUuMTg0LTUuNjk2LjI0NC41NzIuNDM5IDEuMjE0LjU0NSAxLjk0aDEuNzA1Yy4wMjQtMS44MDYtMS4xMzgtMy4yMzYtMS4xMzgtMy4yMzYtMS43ODctMi40My00LjQ1NS0yLjM4Ny00LjQ1NS0yLjM4N3MxLjI2My41OTggMi4zNjYgMi4wMmMtOS4wNDEgNy45OTYtMjAuMzUzIDQuMDU5LTIwLjM1MyA0LjA1OWw0LjY1NS01LjE3Ni0xLjk2OC00LjAxYzEwLjc1NC0zLjkwNiAxOS44MTYtNi45MTQgMzQuODIzLTkuNTY3bC0zLjczLTIuODU5IDEuNjctMS4xYzkuNDgzIDIuNTk2IDE1LjcxNCA0LjUwOCAxNS45MjggOS4zOGExMS4yIDExLjIgMCAwIDEtLjYyMSAyLjgzMWMtMi4xMTIgNS4zMTItOS4xNTYgMTQuMTgtMTEuOTg3IDE3Ljg4OS0xLjg3IDIuNDUzLTMuNjk4IDQuODYtNC45NDQgNy4xNjYtMS4yOTIgMi4zMDUtMi4wMDQgNC40NTYtMS44MzIgNi41MTItLjA5NiAxMi4wNCAyMS40MjggMS45NjggMzEuMTQ5LTQuNTEyLjMxMy0uMjA4LjA3My0uNjg5LS4yODUtLjU3LTI3LjMwMyA5LjA3LTIwLjg2OC0xLjA1LTIwLjg2OC0xLjA1Wm0yNjYuNDc3IDcuNzU0Yy0uNTYxLS4xOS0uOTY1LS41NjMtMS4yMTQtMS4xMjMtLjI1LS41NjItLjM3NC0xLjQyMy0uMzc0LTIuNTkgMC0xLjYyLjI3OS0yLjY3Ljg0LTMuMTQ4LjU2MS0uNDc2IDEuNjEtLjcxNiAzLjE0OC0uNzE2IDEuNTM3IDAgMi41ODcuMjQgMy4xNDcuNzE2LjU2MS40NzkuODQyIDEuNTI4Ljg0MiAzLjE0OXMtLjI4MSAyLjc0NC0uODQyIDMuMjQzYy0uNTYxLjQ5OS0xLjYxLjc0OS0zLjE0Ny43NDktMS4wMzkgMC0xLjgzOS0uMDk1LTIuNC0uMjhaTTE0Ny40MTkgNS4wMWg5LjkyNXY0NS4xMTNoLTkuOTI1VjUuMDFabTE2Ljg4NiAzLjk5NWMwLTQuNjM4Ljk1LTQuOTk1IDUuNDA5LTQuOTk1czUuNDA5LjM1NyA1LjQwOSA0Ljk5NS0uODkyIDUuMTE0LTUuNDA5IDUuMTE0Yy00LjUxNyAwLTUuNDA5LS41MzUtNS40MDktNS4xMTRabS40NzYgOC40M2g5Ljg2N1Y1MC4xNWgtOS44NjdWMTcuNDM2Wm00OS4yMzEgMTYuNjQ5YzAgOS4zMzQtMi4zNzggMTYuNjQ3LTEyLjY2MSAxNi42NDctNi4wNjIgMC04LjQzOS0xLjg0Mi05LjYyOC00LjY5N2wtLjU5NSA0LjEwM2gtOS4wMzRWNC45NWg5Ljg2N3YxNi4yOTFjMS4zMDgtMS45MDIgMy45MjMtMy44MDUgOS4zOS0zLjgwNSAxMC4yODMgMCAxMi42NjEgNi4zNjIgMTIuNjYxIDE2LjY0OFptLTEwLjA0NSAwYzAtNS41ODktLjgzMi05LjQ1My02LjA2My05LjQ1M3MtNi40NzggMy4zODktNi40NzggOS40NTNjMCA2LjA2MyAxLjI0NyA5LjMzNCA2LjQ3OCA5LjMzNCA1LjIzIDAgNi4wNjMtNC4xMDMgNi4wNjMtOS4zMzRabTQ0LjI1OC02LjAxOHYyMi4wNmgtOC44NTdsLS44MzEtMy4zOWMtMS4yNDkgMi4wMjItNC4zOTkgMy45ODQtOS44NjcgMy45ODQtNi45NTUgMC0xMC45MzctMy4xNS0xMC45MzctOS44NyAwLTcuNDMyIDQuMzk5LTEwLjEwNyAxMy4zMTQtMTAuMTA3aDcuMzd2LS4xNzhjMC0zLjgwNi0xLjEyOS00LjgxNy02LjQ3OC00LjgxNy0yLjMxOCAwLTUuODk3LjE3OC04LjAzNy41MzV2LTguMjY1YzIuNDM3LS4zNTYgNy4wMjctLjUzNSA5LjI4NS0uNTM1IDEwLjk5NSAwIDE1LjAzNyAzLjUwOSAxNS4wMzcgMTAuNTgzaC4wMDFabS05LjgwOCAxMi4zMDl2LTMuMjExaC01LjY0NmMtMy45MjIgMC01LjQwOS42NTQtNS40MDkgMy4yNyAwIDIuMDgxIDEuMzY3IDIuODUzIDQuMTYxIDIuODUzIDMuNDQ3IDAgNS45NDQtMS4yNDggNi44OTQtMi45MTN2LjAwMVptNDkuMTY5LTYuMzAzYzAgOS4zMzUtMi4zNzggMTYuNjQ4LTEyLjY2MSAxNi42NDgtNi4wNjIgMC04LjQzOS0xLjg0My05LjYyNy00LjY5N2wtLjU5NSA0LjEwM2gtOS4wMzVWNC45MzloOS44Njd2MTYuMjljMS4zMDgtMS45MDEgMy45MjMtMy44MDUgOS4zOS0zLjgwNSAxMC4yODQgMCAxMi42NjEgNi4zNjMgMTIuNjYxIDE2LjY0OFptLTEwLjA0NSAwYzAtNS41ODgtLjgzMi05LjQ1Mi02LjA2My05LjQ1MlMyNjUgMjguMDA4IDI2NSAzNC4wNzJzMS4yNDggOS4zMzUgNi40NzggOS4zMzVjNS4yMyAwIDYuMDYzLTQuMTAzIDYuMDYzLTkuMzM1Wm0tMTQ5LjI4OSA1LjU5NWgtMTYuMTY3bC0zLjI2OSAxMC4zODRIOTguMDU5bDE1LjI3NC00NS4wNEgxMjcuM2wxNS4xNTcgNDUuMDRoLTEwLjk5NmwtMy4yMDktMTAuMzg0Wm0tMi44NTQtOS4yMTYtNC44MTQtMTUuNjRoLS43MTNsLTQuOTMzIDE1LjY0aDEwLjQ2Wm0xOTYuNDAxLTIuMzg0djIyLjA2aC04Ljg1N2wtLjgzMS0zLjM5Yy0xLjI0OSAyLjAyMi00LjM5OSAzLjk4NC05Ljg2NiAzLjk4NC02Ljk1NiAwLTEwLjkzOC0zLjE1LTEwLjkzOC05Ljg3IDAtNy40MzMgNC4zOTktMTAuMTA3IDEzLjMxNC0xMC4xMDdoNy4zNzF2LS4xNzljMC0zLjgwNS0xLjEzLTQuODE2LTYuNDc4LTQuODE2LTIuMzE5IDAtNS44OTguMTc4LTguMDM4LjUzNFYxOC4wMmMyLjQzNy0uMzU3IDcuMDI3LS41MzUgOS4yODUtLjUzNSAxMC45OTUgMCAxNS4wMzcgMy41MDkgMTUuMDM3IDEwLjU4M2guMDAxWm0tOS44MDcgMTIuMzA5di0zLjIxMWgtNS42NDdjLTMuOTIxIDAtNS40MDguNjU0LTUuNDA4IDMuMjcgMCAyLjA4IDEuMzY2IDIuODUzIDQuMTYgMi44NTMgMy40NDcgMCA1Ljk0NC0xLjI0OSA2Ljg5NS0yLjkxM1ptMzAuMTkxLTYuNTY4YzAtNC4zMTEuNjQ1LTcuNzA2IDEuOTM0LTEwLjE4NCAxLjI4OS0yLjQ3OCAzLjEzMy00LjIyMSA1LjUzMS01LjIyOCAyLjM5Ni0xLjAwNyA1LjQyOC0xLjUxMiA5LjA5Ni0xLjUxMiAxLjUzIDAgMy4wNTIuMDkxIDQuNTYyLjI3MiAxLjUxMS4xODIgMi43OS40MTQgMy44MzguNjk1djguNDAxYy0yLjAxNS0uNzY0LTQuMjkxLTEuMTQ4LTYuODMtMS4xNDgtMi42OTkgMC00LjY2NC42MjUtNS44OTIgMS44NzMtMS4yMyAxLjI1LTEuODQ0IDMuNTI3LTEuODQ0IDYuODMgMCAyLjI1Ny4yODIgNCAuODQ3IDUuMjI4LjU2MyAxLjIzIDEuNDIgMi4wOTYgMi41NjggMi42IDEuMTQ5LjUwNCAyLjY2OS43NTUgNC41NjMuNzU1IDIuNTM5IDAgNC44NTUtLjM4MiA2Ljk1MS0xLjE0OXY4LjIyYy0uOTY4LjM2My0yLjI4OC42NjUtMy45NTkuOTA3YTMzLjYyMiAzMy42MjIgMCAwIDEtNC44MDQuMzYzYy0zLjY2OCAwLTYuNy0uNTA1LTkuMDk2LTEuNTEyLTIuMzk4LTEuMDA2LTQuMjQyLTIuNzUtNS41MzEtNS4yMjctMS4yODktMi40NzgtMS45MzQtNS44NzMtMS45MzQtMTAuMTg1di4wMDFabTMwLjI4NyAwYzAtNC4zNTEuNjM1LTcuNzU2IDEuOTA1LTEwLjIxNSAxLjI2OC0yLjQ1NyAzLjA4Mi00LjE5IDUuNDM5LTUuMTk3IDIuMzU4LTEuMDA3IDUuMzY5LTEuNTEyIDkuMDM2LTEuNTEyczYuNjI3LjUwNSA5LjAwNSAxLjUxMmMyLjM3OCAxLjAwNyA0LjE5IDIuNzQgNS40NCA1LjE5NyAxLjI0OCAyLjQ1OSAxLjg3MyA1Ljg2MyAxLjg3MyAxMC4yMTUgMCA0LjM1Mi0uNjI1IDcuNzU3LTEuODczIDEwLjIxNC0xLjI1IDIuNDU5LTMuMDYzIDQuMTkyLTUuNDQgNS4xOTgtMi4zNzggMS4wMDctNS4zNzkgMS41MTEtOS4wMDUgMS41MTEtMy42MjYgMC02LjY3OS0uNTA0LTkuMDM2LTEuNTEtMi4zNTctMS4wMDctNC4xNy0yLjc0LTUuNDM5LTUuMTk5LTEuMjctMi40NTctMS45MDUtNS44NjItMS45MDUtMTAuMjE0Wm0xNi4zOCA5LjM2OGMxLjU3MSAwIDIuNzgtLjI4MiAzLjYyNi0uODQ3Ljg0Ny0uNTYzIDEuNDUxLTEuNTEgMS44MTMtMi44NC4zNjMtMS4zMy41NDQtMy4yMjMuNTQ0LTUuNjgxcy0uMTgxLTQuMzYxLS41NDQtNS43MTFjLS4zNjItMS4zNS0uOTc3LTIuMzE3LTEuODQzLTIuOTAyLS44NjctLjU4NC0yLjA2NS0uODc3LTMuNTk2LS44NzctMS41MzEgMC0yLjc4MS4yOTMtMy42MjYuODc3LS44NDcuNTg1LTEuNDUxIDEuNTUyLTEuODE0IDIuOTAyLS4zNjIgMS4zNS0uNTQzIDMuMjU0LS41NDMgNS43MTEgMCAyLjQ1Ny4xODEgNC4zNTEuNTQzIDUuNjgxLjM2MyAxLjMzLjk3NyAyLjI3NyAxLjg0NCAyLjg0Ljg2Ni41NjUgMi4wNjQuODQ3IDMuNTk2Ljg0N1pNNDYxIDI4LjgyNVY1MC4wNWgtMTAuMTkxVjMwLjM5MmMwLTIuMDUtLjMzMi0zLjQ1Ny0uOTk1LTQuMjIxLS42NjMtLjc2NC0xLjc5OS0xLjE0Ni0zLjQwNy0xLjE0NnMtMi44MTQuMzMyLTMuNjE4Ljk5NmMtLjgwNS42NjMtMS4zNjcgMS43MzktMS42ODkgMy4yMjZWNTAuMDVoLTEwLjE5MVYzMC4zOTJjMC0yLjA1LS4zNTItMy40NTctMS4wNTUtNC4yMjEtLjcwNC0uNzY0LTEuODItMS4xNDYtMy4zNDctMS4xNDYtMS41MjYgMC0yLjcxNC4yODItMy40MzYuODQ1LS43MjQuNTYzLTEuMjQ3IDEuNDg3LTEuNTY4IDIuNzczVjUwLjA1aC0xMC4xMzFWMTcuNDg4aDEwLjEzMXYzLjQ5OGMuODQ0LTEuMzI3IDEuOTktMi4zNDEgMy40MzctMy4wNDYgMS40NDctLjcwMyAzLjMzNi0xLjA1NSA1LjY2OC0xLjA1NSAyLjMzMiAwIDQuMzExLjM1MiA1LjgxOSAxLjA1NSAxLjUwOC43MDQgMi42NDQgMS43OCAzLjQwOCAzLjIyNiAxLjY0OC0yLjg1NCA1LjA0NC00LjI4IDEwLjE5MS00LjI4IDMuNjk4IDAgNi40NTIuOTI0IDguMjYxIDIuNzczIDEuODA5IDEuODUgMi43MTQgNC45MDUgMi43MTQgOS4xNjZINDYxWiIvPjwvZz48ZGVmcz48Y2xpcFBhdGggaWQ9ImEiPjxwYXRoIGZpbGw9IiNmZmYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC4yNSAuMDQ4KSIgZD0iTTAgMGg0NjAuNzV2NTUuMDY0SDB6Ii8+PC9jbGlwUGF0aD48L2RlZnM+PC9zdmc+);
+      background-size: auto 20px;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-size: 0;
+    }
+    .order-thumb {
+      padding: 16px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+   
+    .order-thumb-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+   
+    /* Product image with badge */
+    .thumb-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a2a3a 0%, #2c4a6a 100%);
+    }
+    .thumb-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .thumb-badge {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 500;
+      text-align: center;
+      padding: 4px 0;
+    }
+   
+    /* Right side: order no + subtotal toggle */
+    .thumb-info {
+      flex: 1;
+      min-width: 0;
+    }
+   
+    .order-no-link {
+      font-size: 13px;
+      color: #555;
+      text-decoration: underline;
+      cursor: pointer;
+      display: inline-block;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .order-no-link:hover { color: #222; }
+   
+    .subtotal-label {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 2px;
+    }
+   
+    /* Clickable subtotal row */
+    .subtotal-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+      width: fit-content;
+    }
+    .subtotal-toggle:hover .subtotal-amount { opacity: 0.8; }
+   
+    .subtotal-amount {
+      font-size: 20px;
+      font-weight: 700;
+      color: #111;
+      letter-spacing: -0.3px;
+    }
+   
+    /* Chevron icon */
+    .chevron {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      transition: transform 0.22s ease;
+      color: #333;
+    }
+    .chevron.open {
+      transform: rotate(180deg);
+    }
+   
+    /* ── Collapsible breakdown ── */
+    .subtotal-breakdown {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.28s ease, opacity 0.22s ease;
+      opacity: 0;
+    }
+    .subtotal-breakdown.open {
+      max-height: 200px;
+      opacity: 1;
+    }
+   
+    .breakdown-inner {
+      background: #f7f7f7;
+      border-radius: 8px;
+      margin-top: 12px;
+      padding: 14px 16px;
+    }
+   
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: #333;
+      padding: 6px 0;
+    }
+    .breakdown-row .b-label { font-weight: 400; }
+    .breakdown-row .b-value { font-weight: 700; }
+   
+    .breakdown-divider {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      margin: 6px 0;
+    }
+   
+    .breakdown-row.subtotal-row .b-label { font-weight: 700; }
+    .breakdown-row.subtotal-row .b-value { font-weight: 700; }
+
+    .checkout-payment-icon-medium {
+      height: 20px;
+    }
+  
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="#" class="logo"></a>
+  </header>
+  <div class="page-wrap">
+  <h1 class="page-title">Select a payment method</h1>
+
+  <div class="layout">
+
+    <!-- ══ LEFT: PAYMENT METHODS ══ -->
+    <div>
+      <div class="payment-panel">
+
+        <!-- 1. Credit/Debit Card -->
+        <div class="method-item" id="item-card" onclick="selectMethod('card')">
+          <div class="radio checked" id="radio-card"></div>
+          <div class="method-icon">
+            <svg width="28" height="20" viewBox="0 0 28 20" fill="none">
+              <rect x="0.5" y="0.5" width="27" height="19" rx="2.5" stroke="#ccc"/>
+              <rect x="0" y="5" width="28" height="5" fill="#ccc"/>
+            </svg>
+          </div>
+          <div class="method-label" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span class="method-name">Add a new card</span>
+            <div class="card-logos">
+              <span class="card-logo logo-visa">VISA</span>
+              <span class="mc-icon"><span class="mc-left"></span><span class="mc-right"></span></span>
+              <span class="card-logo logo-amex">AMEX</span>
+              <span class="card-logo logo-diners">DC</span>
+              <span class="card-logo logo-discover" style="font-size:7px;padding:0 3px;">DISC</span>
+              <span class="card-logo logo-jcb">JCB</span>
+              <span class="card-logo logo-generic">UP</span>
+              <span class="card-logo logo-generic" style="background:#fff3e0;color:#e55a00;">✦</span>
+              <span class="card-logo logo-generic" style="background:#fff3e0;color:#e55a00;">⊕</span>
+              <span class="card-logo logo-generic" style="background:#1a73e8;color:#fff;font-size:9px;">S</span>
+              <a class="see-all" href="#">See all ›</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card form -->
+        <div class="card-form active" id="form-card">
+          <div class="form-group">
+            <div class="form-field">
+              <input type="text" id="card-number" placeholder="Card number" />
+              <label for="card-number">Card number <span class="required-star">*</span></label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <input type="text" id="given-name" placeholder="Given name(s)" />
+              <label for="given-name">Given name(s) <span class="required-star">*</span></label>
+              <span class="field-clear" onclick="clearField('given-name')">✕</span>
+            </div>
+            <div class="form-field">
+              <input type="text" id="surname" placeholder="Surname" />
+              <label for="surname">Surname <span class="required-star">*</span></label>
+              <span class="field-clear" onclick="clearField('surname')">✕</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <input type="text" id="expiry" placeholder="Expire in MM/YY" />
+              <label for="expiry">Expire in MM/YY <span class="required-star">*</span></label>
+            </div>
+            <div class="form-field">
+              <input type="password" id="cvv" placeholder="CVV/CSC" />
+              <label for="cvv">CVV/CSC <span class="required-star">*</span></label>
+              <span class="field-eye">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              </span>
+              <span class="field-info">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+            </div>
+          </div>
+          <div class="checkbox-row">
+            <input type="checkbox" id="remember-card" checked />
+            <label for="remember-card">Remember this card for future one-click payments</label>
+          </div>
+        </div>
+
+        <!-- 2. PayPal -->
+        <div class="method-item" id="item-paypal" onclick="selectMethod('paypal')">
+          <div class="radio" id="radio-paypal"></div>
+          <div class="method-icon">
+            <img src="https://s.alicdn.com/@img/imgextra/i1/O1CN01sYmrxN1Rm7ogGyeXK_!!6000000002153-2-tps-96-64.png?quality=close" alt="">
+          </div>
+          <div class="method-label">
+            <span class="method-name">PayPal</span>
+          </div>
+        </div>
+
+        <!-- 3. Apple Pay -->
+        <div class="method-item" id="item-applepay" onclick="selectMethod('applepay')">
+          <div class="radio" id="radio-applepay"></div>
+          <div class="method-icon">
+            <img src="https://s.alicdn.com/@img/imgextra/i2/O1CN01KTo3Hb1nfdkuJmKGl_!!6000000005117-2-tps-96-64.png?quality=close" alt="">
+          </div>
+          <div class="method-label">
+            <span class="method-name">Apple Pay</span>
+            <div class="applepay-expanded" id="form-applepay">You need a compatible Apple device to complete the payment.</div>
+          </div>
+        </div>
+
+        <!-- 4. Google Pay -->
+        <div class="method-item" id="item-gpay" onclick="selectMethod('gpay')">
+          <div class="radio" id="radio-gpay"></div>
+          <div class="method-icon">
+            <img src="https://s.alicdn.com/@img/imgextra/i1/O1CN013CqruJ1exCOhxCkvt_!!6000000003937-2-tps-96-64.png?quality=close" />
+          </div>
+          <div class="method-label">
+            <span class="method-name">Google Pay</span>
+          </div>
+        </div>
+
+        <!-- 5. Wire transfer -->
+        <div class="method-item" id="item-wire" onclick="selectMethod('wire')">
+          <div class="radio" id="radio-wire"></div>
+          <div class="method-icon">
+            <img src="https://s.alicdn.com/@img/imgextra/i3/O1CN01qpKzdG1WONMFOCD8N_!!6000000002778-2-tps-96-64.png?quality=close">
+          </div>
+          <div class="method-label">
+            <span class="method-name">Wire transfer</span>
+            <div class="wire-expanded" id="form-wire">
+              <div class="wire-desc">Transfer payment through Alibaba.com to the supplier, secured by Trade Assurance.</div>
+              <div class="wire-tabs">
+                <div class="wire-tab active">International transfer</div>
+                <div class="wire-tab" style="flex:1; border-bottom: 1px solid #e0e0e0; margin-bottom:-1px;"></div>
+              </div>
+              <div class="wire-details">
+                <div>
+                  <div class="wire-detail-label">Beneficiary country/region:</div>
+                  <div class="wire-detail-value">Singapore</div>
+                </div>
+                <div>
+                  <div class="wire-detail-label">Payment processing fee charged by remitting bank:</div>
+                  <div class="wire-detail-value" style="font-weight:400;color:#555;">Depends on your bank</div>
+                  <div class="wire-detail-label" style="margin-top:10px;">Beneficiary bank:</div>
+                  <div class="wire-detail-value">
+                    <img 
+                      data-i18n-appname="" 
+                      data-i18n-ns="" 
+                      data-i18n-key="checkout.payment-icon.citibank" 
+                      src="https://s.alicdn.com/@img/tfs/TB1UtDLNSzqK1RjSZPxXXc4tVXa-137-40.svg" 
+                      class="checkout-payment-icon-medium logo-citi"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Mobile money (disabled) -->
+        <div class="method-item" id="item-mobile" style="cursor:default;opacity:0.7;">
+          <div class="radio disabled" id="radio-mobile"></div>
+          <div class="method-icon">
+            <svg width="24" height="24" fill="none" stroke="#bbb" stroke-width="1.5" viewBox="0 0 24 24">
+              <rect x="5" y="2" width="14" height="20" rx="2"/>
+              <line x1="12" y1="18" x2="12" y2="18.01" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="method-label">
+            <span class="method-name disabled">Mobile money</span>
+            <div class="method-sub">Payment amount cannot be over XOF 2,000,000.</div>
+          </div>
+        </div>
+
+      </div><!-- /payment-panel -->
+    </div>
+
+    <!-- ══ RIGHT: SUMMARY PANEL ══ -->
+    <div class="summary-panel">
+
+      <!-- Order thumbnail -->
+      <div class="order-thumb">
+        <div class="order-thumb-row">
+       
+          <!-- Product image -->
+          <div class="thumb-img">
+            <img src="<%= image_link %>" alt="Product" onerror="this.style.display='none'" />
+            <div class="thumb-badge">1 product(s)</div>
+          </div>
+       
+          <!-- Info -->
+          <div class="thumb-info">
+            <!-- Replace order number with EJS var -->
+            <a class="order-no-link" href="#">Order No. #<%= order_id %></a>
+       
+            <div class="subtotal-label">Subtotal:</div>
+       
+            <!-- Toggle trigger -->
+            <div class="subtotal-toggle" onclick="toggleBreakdown()" id="subtotal-toggle">
+              <span class="subtotal-amount">USD <%= Number(amount + shipping_fee).toLocaleString('en-US', { minimumFractionDigits: 2 }) %></span>
+              <svg class="chevron" id="chevron-icon" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 15l-6-6-6 6"/>
+              </svg>
+            </div>
+       
+            <!-- Collapsible breakdown -->
+            <div class="subtotal-breakdown open" id="subtotal-breakdown">
+              <div class="breakdown-inner">
+                <div class="breakdown-row">
+                  <span class="b-label">Item(s) total</span>
+                  <span class="b-value">USD <%= Number(amount).toLocaleString('en-US', { minimumFractionDigits: 2 }) %></span>
+                </div>
+                <div class="breakdown-row">
+                  <span class="b-label">Shipping fee</span>
+                  <span class="b-value">USD <%= typeof shipping_fee !== 'undefined' ? Number(shipping_fee).toLocaleString('en-US', { minimumFractionDigits: 2 }) : '0.00' %></span>
+                </div>
+                <hr class="breakdown-divider" />
+                <div class="breakdown-row subtotal-row">
+                  <span class="b-label">Subtotal</span>
+                  <span class="b-value">USD <%= Number(amount + shipping_fee).toLocaleString('en-US', { minimumFractionDigits: 2 }) %></span>
+                </div>
+              </div>
+            </div>
+       
+          </div>
+        </div>
+      </div>
+      
+
+      <!-- Summary body -->
+      <div class="summary-body">
+        <div class="summary-heading">Payment summary</div>
+
+        <!-- Default rows (card / gpay / applepay) -->
+        <div id="summary-standard">
+          <div class="summary-row">
+            <span class="label">Order amount</span>
+            <span class="amount">USD <%= (amount + shipping_fee).toLocaleString('en-US', {minimumFractionDigits:2}) %></span>
+          </div>
+          <div class="summary-row" id="processing-fee-row">
+            <span class="label">
+              Payment processing fee
+              <span class="info-circle">i</span>
+            </span>
+            <span class="amount">USD <%= process_fee.toLocaleString('en-US', {minimumFractionDigits:2}) %></span>
+          </div>
+          <hr class="summary-divider" />
+          <div class="summary-total-row">
+            <span class="summary-total-label">Pay in <a href="#">USD</a></span>
+            <span class="summary-total-amount" id="total-display">USD <%= (amount + shipping_fee + process_fee).toLocaleString('en-US', {minimumFractionDigits:2}) %></span>
+          </div>
+        </div>
+
+        <!-- Wire transfer rows (no processing fee) -->
+        <div id="summary-wire" style="display:none;">
+          <div class="summary-row">
+            <span class="label">Order amount</span>
+            <span class="amount">USD <%= (amount + shipping_fee).toLocaleString('en-US', {minimumFractionDigits:2}) %></span>
+          </div>
+          <hr class="summary-divider" />
+          <div class="summary-total-row">
+            <span class="summary-total-label">Pay in USD</span>
+            <span class="summary-total-amount">USD <%= (amount + shipping_fee).toLocaleString('en-US', {minimumFractionDigits:2}) %></span>
+          </div>
+        </div>
+
+        <!-- Pay button area -->
+        <div id="btn-area">
+          <!-- Card / Google Pay default -->
+          <button class="pay-btn pay-btn-orange" id="btn-paynow" onclick="openPaymentModal()">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Pay now
+          </button>
+        </div>
+
+        <div class="pay-disclaimer" id="pay-disclaimer">
+          By clicking [Pay now] you confirm the payment is for business purposes only and agree to be bound by the details of this transaction and the terms and conditions of Alibaba.com.
+        </div>
+      </div>
+
+      <!-- Secure checkout -->
+      <div class="secure-section">
+        <div class="secure-title">Secure checkout</div>
+        <div class="secure-item">
+          <svg width="16" height="16" fill="none" stroke="#4caf50" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Your financial and personal information is SSL-encrypted
+        </div>
+        <div class="secure-item">
+          <svg width="16" height="16" fill="none" stroke="#4caf50" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+          We will not disclose or sell your personal information
+        </div>
+        <div class="secure-item">
+          <svg width="16" height="16" fill="none" stroke="#4caf50" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Every payment is processed securely and protected by PCI DSS standards
+        </div>
+      </div>
+
+    </div><!-- /summary-panel -->
+
+  </div><!-- /layout -->
+  <div id="payment-modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:999; align-items:center; justify-content:center;">
+    <div style="background:#fff; border-radius:12px; border:1px solid #e8e8e8; width:100%; max-width:400px; overflow:hidden; margin:24px;">
+      <div style="padding:24px 24px 0; display:flex; align-items:flex-start; justify-content:space-between;">
+        <div style="width:44px; height:44px; border-radius:50%; background:#fff8ec; display:flex; align-items:center; justify-content:center;">
+          <svg width="22" height="22" fill="none" stroke="#c97a00" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <button onclick="closePaymentModal()" style="background:none; border:none; cursor:pointer; padding:4px; color:#888; font-size:20px; line-height:1;">✕</button>
+      </div>
+      <div style="padding:16px 24px 24px;">
+        <p style="font-size:16px; font-weight:600; margin:0 0 8px;">Payment not available</p>
+        <p style="font-size:14px; color:#555; margin:0 0 24px; line-height:1.6;">This payment method is not available for the selected product, as it is not supported by the merchant. Please select a different method or contact support if the issue persists.</p>
+        <div style="display:flex; gap:10px;">
+          <button onclick="closePaymentModal()" style="flex:1; padding:10px; border-radius:24px; border:1.5px solid #333; background:#fff; font-size:14px; cursor:pointer;">Go back</button>
+          <button onclick="closePaymentModal()" style="flex:1; padding:10px; border-radius:24px; border:none; background:#e55a00; color:#fff; font-size:14px; cursor:pointer;">Choose another</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-wrap -->
+
+<script>
+  // EJS variables passed from backend (safe defaults for standalone HTML preview)
+  const ORDER_AMOUNT   = <%= amount %>;
+  const PROCESSING_FEE = <%= process_fee %>;
+  const ORDER_NUMBER   = '<%= order_id %>';
+
+  let currentMethod = 'card';
+
+  const methods = ['card', 'paypal', 'applepay', 'gpay', 'wire'];
+
+  function selectMethod(method) {
+    currentMethod = method;
+
+    // Reset all radios & selections
+    methods.forEach(m => {
+      const radio = document.getElementById('radio-' + m);
+      if (radio) radio.classList.remove('checked');
+      const item = document.getElementById('item-' + m);
+      if (item) item.classList.remove('selected');
+    });
+
+    // Activate selected
+    const radio = document.getElementById('radio-' + method);
+    if (radio) radio.classList.add('checked');
+    const item = document.getElementById('item-' + method);
+    if (item) item.classList.add('selected');
+
+    // Hide all forms
+    const cardForm = document.getElementById('form-card');
+    cardForm.classList.remove('active');
+    document.getElementById('form-applepay').classList.remove('active');
+    document.getElementById('form-wire').classList.remove('active');
+
+    // Show the right summary
+    document.getElementById('summary-standard').style.display = '';
+    document.getElementById('summary-wire').style.display = 'none';
+
+    // Reset button area
+    updateButton(method);
+
+    // Show method-specific form
+    if (method === 'card') {
+      cardForm.classList.add('active');
+    } else if (method === 'applepay') {
+      document.getElementById('form-applepay').classList.add('active');
+    } else if (method === 'wire') {
+      document.getElementById('form-wire').classList.add('active');
+      document.getElementById('summary-standard').style.display = 'none';
+      document.getElementById('summary-wire').style.display = '';
+    }
+  }
+
+  function updateButton(method) {
+    const btnArea = document.getElementById('btn-area');
+    const disclaimer = document.getElementById('pay-disclaimer');
+
+    if (method === 'paypal') {
+      btnArea.innerHTML = `
+        <button class="pay-btn pay-btn-paypal" onclick="openPaymentModal()">
+          <span class="pp-blue">Pay</span><span class="pp-lblue">Pal</span>
+        </button>`;
+      disclaimer.textContent = 'By clicking [Pay now] you confirm the payment is for business purposes only and agree to be bound by the details of this transaction and the terms and conditions of Alibaba.com.';
+    } else if (method === 'applepay') {
+      btnArea.innerHTML = `
+        <button class="pay-btn pay-btn-apple" onclick="openPaymentModal()">
+          Pay with &nbsp;<svg width="16" height="16" viewBox="0 0 814 1000" fill="white"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-167.2-37.5h-5.8c-5.8-.6-80.2-8.9-80.2-8.9S26.7 984.4 0 1000c0 0 5.8-34.6 5.8-34.6V7.6C5.8 3.2 6.4 0 7.7 0h2.6L131.6 85.8H0v814.6H788.1V340.9z"/></svg> Pay
+        </button>`;
+      disclaimer.textContent = 'By clicking [Pay now] you confirm the payment is for business purposes only and agree to be bound by the details of this transaction and the terms and conditions of Alibaba.com.';
+    } else if (method === 'wire') {
+      btnArea.innerHTML = `
+        <button class="pay-btn pay-btn-continue" onclick="handlePay('${method}')">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Continue
+        </button>`;
+      disclaimer.textContent = 'By clicking [Continue] you confirm the payment is for business purposes only and agree to be bound by the details of this transaction and the terms and conditions of Alibaba.com.';
+    } else {
+      btnArea.innerHTML = `
+        <button class="pay-btn pay-btn-orange" onclick="openPaymentModal()">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Pay now
+        </button>`;
+      disclaimer.textContent = 'By clicking [Pay now] you confirm the payment is for business purposes only and agree to be bound by the details of this transaction and the terms and conditions of Alibaba.com.';
+    }
+  }
+
+  function clearField(id) {
+    document.getElementById(id).value = '';
+  }
+
+  function handlePay(method) {
+    if (method != 'wire'){
+    alert(`Selected payment mode is not available`);
+    return
+    }
+    window.open('/payment/tt/detail?cashierOrderNo=<%= reference %>&paymentStep=ADVANCE&source=DETAIL&buyerGuestAccount=false&urlDomain=biz.alibaba.com&cna=QuvDIiyaTiACAS%2F2WPMvIsXE&ip=2.20.196.222&riskDeviceType=PC&umidToken=T2gAavG6Ptcgifm2HcsGdYcQa4WrELu4TcVab6kYMij-DhTUYTbi6G7NgFuFcQH5bu8=', '_blank')
+  }
+</script>
+<script>
+  // Track state — starts open (matching the screenshot)
+  let breakdownOpen = true;
+ 
+  function toggleBreakdown() {
+    breakdownOpen = !breakdownOpen;
+ 
+    const panel   = document.getElementById('subtotal-breakdown');
+    const chevron = document.getElementById('chevron-icon');
+ 
+    if (breakdownOpen) {
+      panel.classList.add('open');
+      chevron.classList.add('open');
+    } else {
+      panel.classList.remove('open');
+      chevron.classList.remove('open');
+    }
+  }
+ 
+  // Init: chevron starts pointing up (open state)
+  document.getElementById('chevron-icon').classList.add('open');
+
+  function openPaymentModal() {
+    document.getElementById('payment-modal-overlay').style.display = 'flex';
+  }
+  function closePaymentModal() {
+    document.getElementById('payment-modal-overlay').style.display = 'none';
+  }
+  document.getElementById('payment-modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closePaymentModal();
+  });
+</script>
+
+</body>
+</html>

